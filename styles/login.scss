@@ -1,0 +1,31 @@
+$theme-colors: ("color1":#DED0C1,
+    "color2":#C2A78B,
+    "color3":#A57E57,
+    "color4":#70553B,
+);
+
+@import "bootstrap/scss/bootstrap.scss";
+
+.btn-login {
+    width: 35rem;
+    height: 3rem;
+    border-radius: 0.8rem;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.input-underline {
+    border-radius: unset;
+    border-top: unset;
+    border-left: unset;
+    border-right: unset;
+    border-bottom: 1px grey solid;
+    width: 35rem;
+}
+
+.input-underline:focus {
+    outline: unset;
+}

@@ -1,4 +1,5 @@
 import '../styles/globals.css'
+import '../styles/login.scss'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {useEffect} from 'react'
 
