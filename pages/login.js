@@ -30,7 +30,7 @@ const login = () => {
                         </h3>
                         </div>
                         
-                        <p className='mx-5 mt-4 '>Transfering money is eassier than ever, you can access Zwallet wherever you are. Desktop, laptop, mobile phone? we cover all of that for you!</p>
+                        <p className='mx-5 mt-4 '>Transfering money is eassier than ever, you can access Wallet-me wherever you are. Desktop, laptop, mobile phone? we cover all of that for you!</p>
                         <Row>
                             <Col xl={12}>
                             <div className='d-flex flex-row align-items-center px-5 my-3 w-100 d-inline-block position-relative' >
