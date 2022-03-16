@@ -1,7 +1,7 @@
 import {Col, Row, Container} from 'react-bootstrap'
 import Image from 'next/image'
 import Link from 'next/link'
-import AiOutlineMail from 'react-icons'
+import FaMailBulk from 'react-icons/fa'
 
 const login = () => {
     return (
@@ -34,15 +34,17 @@ const login = () => {
                         <p className='mx-5 mt-4 '>Transfering money is eassier than ever, you can access Zwallet wherever you are. Desktop, laptop, mobile phone? we cover all of that for you!</p>
                         <Row>
                             <Col xl={12}>
-                            <div className='px-5 my-3 w-100 d-inline-block ' >
-                                <input type="text" className=' py-2 text-color3 input-underline' placeholder= 'Enter your e-mail'/>
-                                {/* <AiOutlineMail /> */}
+                            <div className='d-flex flex-row align-items-center px-5 my-3 w-100 d-inline-block position-relative' >
+                                <i className="bi bi-envelope position-absolute"></i>
+                                <input type="text" className='px-4 py-2 text-color3 input-underline' placeholder= 'Enter your e-mail'/>
+                                
                             </div>
                             <span className="underline"></span>
                             </Col>
                             <Col xl={12}>
-                            <div className='px-5 my-2  d-inline-block text-color3' >
-                                <input type="text" className='py-2 text-color3 input-underline' placeholder= 'Enter your password'/>
+                            <div className='d-flex flex-row align-items-center px-5 my-3 w-100 d-inline-block position-relative' >
+                                <i className="bi bi-lock position-absolute"></i>
+                                <input type="text" className='px-4 py-2 text-color3 input-underline' placeholder= 'Enter your password'/>
                             </div>
                             <span className="underline"></span>
                             </Col>
