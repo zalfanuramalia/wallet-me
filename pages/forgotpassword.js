@@ -39,7 +39,7 @@ const forgotpassword = () => {
                             </div>
                             <span className="underline"></span>
                             </Col>                            
-                            <Col xl={12} className='text-center mt-3'>
+                            <Col xl={12} className='text-center mt-4'>
                                 <button className='bg-color3 btn-login mt-3'>Confirm</button>
                             </Col>                            
                         </Row>                       
