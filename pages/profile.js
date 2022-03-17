@@ -4,6 +4,7 @@ import SidePart from "../components/SidePart"
 import Image from "next/image"
 import { VscEdit } from "react-icons/vsc"
 import { BsArrowRight } from "react-icons/bs"
+import Footer from "../components/Footer"
 
 const profile = () => {
     return (
@@ -75,6 +76,7 @@ const profile = () => {
                 </Col>
             </Row>
         </Container>
+        <Footer />
         </>
     )
 }
