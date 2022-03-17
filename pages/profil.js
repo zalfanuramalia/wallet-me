@@ -1,6 +1,8 @@
+import NavbarComponent from "../components/NavbarHome"
+
 const profil = () => {
     return (
-        <div>Profil</div>
+        <NavbarComponent />
     )
 }
 
