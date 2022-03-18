@@ -1,10 +1,17 @@
 import {Col, Row, Container} from 'react-bootstrap'
 import Image from 'next/image'
 import Link from 'next/link'
+import Head from 'next/head'
 
 const login = () => {
     return (
-        <div className='container-fluid log'>          
+        <>
+        <Head>
+        <title>Home</title>
+        <meta name="description" content="Next Wallet your future wallet" />
+        <link rel="icon" href="/favicon.ico" />
+        </Head>
+        <div className='container-fluid'>          
                 <Row >
                     <Col xl={6} className='bg-color1 log-1'>
                         <div className='bg-title'>
@@ -65,7 +72,8 @@ const login = () => {
                         </Row>                       
                     </Col>
                 </Row>
-        </div>
+            </div>
+        </>
     )
 }
 
