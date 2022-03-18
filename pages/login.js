@@ -13,7 +13,7 @@ const login = () => {
         </Head>
         <div className='container-fluid'>          
                 <Row >
-                    <Col xl={6} className='bg-color1'>
+                    <Col xl={6} className='bg-color1 log-1'>
                         <div className='bg-title'>
                             <div className='text-center px-5 mx-5 mt-4 title'>Wallet-me</div>
                             <div className='d-flex flex-row justify-content-center'>
