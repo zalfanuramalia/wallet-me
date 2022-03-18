@@ -1,10 +1,13 @@
 import {Col, Row, Container} from 'react-bootstrap'
 import Image from 'next/image'
-import Input from '@mui/material/Input';
-import Link from 'next/link'
+import OtpInput from 'react-otp-input';
+import { useState } from 'react';
+import createpin from '../styles/createpin.module.scss'
 
-const createpin = () => {
+const CreatePin = () => {
+    const [otp, setOtp] = useState('')
     return (
+        
         <div className='container-fluid log'>          
                 <Row >
                     <Col xl={6} className='bg-color1 log-1'>
@@ -34,12 +37,15 @@ const createpin = () => {
                         <p className='mx-5 mt-4 '>Create 6 digits pin to secure all your money and your data in Zwallet app. Keep it secret and don’t tell anyone about your Zwallet account password and the PIN.</p>
                         <Row>
                             <Col xl={12}>
-                            <div className='d-flex px-4'>
-                                <Input type="password" autoComplete='off' className='py-3 my-2 mx-4 text-center' />
-                                <Input type="password" autoComplete='off' className='py-3 my-2 mx-4 text-center' />
-                                <Input type="password" autoComplete='off' className='py-3 my-2 mx-4 text-center' />
-                                <Input type='password' autoComplete='off' className='py-3 my-2 mx-4 text-center' />
-                            </div>
+                                <div>
+                                <OtpInput 
+                                    value={otp}
+                                    onChange={setOtp}
+                                    numInputs={6}
+                                    isInputNum={true}
+                                    containerStyle='flex justify-content-between mt-5 mb-5 mx-5'
+                                    inputStyle={createpin.otpInput}                    />
+                                </div>
                             </Col>                            
                             <Col xl={12} className='text-center mt-4'>
                                 <button className='bg-color3 btn-login mt-3'>Confirm</button>
@@ -51,4 +57,4 @@ const createpin = () => {
     )
 }
 
-export default createpin
+export default CreatePin
