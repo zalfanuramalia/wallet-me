@@ -5,10 +5,16 @@ import Image from 'next/image';
 import { Button } from "react-bootstrap";
 import SidePart from "../components/SidePart";
 import Footer from "../components/Footer"
+import Head from "next/head";
 
 const confirmation= () =>{
     return (     
-        <>
+        <>  
+            <Head>
+            <title>Confirmation</title>
+            <meta name="description" content="Next Wallet your future wallet" />
+            <link rel="icon" href="/favicon.ico" />
+            </Head>
             <NavbarComponent />
             <Container>
                 <Row>
