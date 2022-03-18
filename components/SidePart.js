@@ -5,6 +5,7 @@ import {BsGrid} from 'react-icons/bs'
 import {HiOutlineArrowUp, HiOutlinePlus} from 'react-icons/hi'
 import {FiUser} from 'react-icons/fi'
 import {MdLogout} from "react-icons/md"
+import confirmations from "../styles/confirmation.module.scss";
 
 const SidePart = ()=> {
     const route = useRouter()
@@ -23,7 +24,6 @@ const SidePart = ()=> {
         <style jsx>
         {`
             .variation {
-                background-color: white;
                 list-style-type: none;
             }
             .variation li {
@@ -49,7 +49,7 @@ const SidePart = ()=> {
         {variation.map(item => {
             const Icon = item.icon
             return (
-                <li key={item.name}>
+                <li key={item.name} >
                     <Link href={item.link}>
                         <a className={`d-flex flex-row align-items-center mt-4 ${active===item.link?'active':'' }`}>
                            <div><span className='px-3'><Icon  /></span> {item.name}</div> 
