@@ -23,7 +23,6 @@ const SidePart = ()=> {
         <style jsx>
         {`
             .variation {
-                background-color: white;
                 list-style-type: none;
             }
             .variation li {
