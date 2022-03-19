@@ -1,10 +1,56 @@
-import {Col, Row, Container} from 'react-bootstrap'
+import {Col, Row, Form} from 'react-bootstrap'
+import React, { useState } from 'react'
+import { useRouter } from 'next/router'
 import Image from 'next/image'
 import Link from 'next/link'
+import { getDataRegister } from "../redux/actions/register";
+import { useDispatch, useSelector } from 'react-redux'
 
-const signup = () => {
+const Register = () => {
+    const register = useSelector(state => state.register)
+    const [error,setError] = useState({})
+    const dispatch = useDispatch()
+    const router = useRouter()
+    const [success,setSuccess] = useState()
+    const [validated, setValidated] = useState(false);
+    
+    const validation = (data)=>{
+        const error = {}
+        if(!data.firstname || data.firstname===''){
+            error.firstname = 'Firstname must be filled'
+        }
+        if(!data.lastname || data.lastname===''){
+            error.lastname = 'Lastname must be filled'
+        }
+        if(!data.email || data.firstnam===''){
+            error.email = 'Email must be filled'
+        }
+        if(!data.password || data.password===''){
+            error.password = 'Password must be filled'
+        }
+        return error;
+    }
+
+    const handleRegister = (event)=>{
+        event.preventDefault()
+        var data = {};
+        data.firstname = event.target.elements["firstname"].value;
+        data.lastname = event.target.elements["lastname"].value;
+        data.email = event.target.elements["email"].value;
+        data.password = event.target.elements["password"].value;
+        var valid = validation(data)
+        if(Object.keys(valid).length > 0){
+            setError(valid)
+            setValidated(false)
+        }else{
+            dispatch(getDataRegister(data))
+            router.push('/createpin')
+        }
+    }
+
     return (
-        <div className='container-fluid'>          
+        <div className='container-fluid'>
+            <Form validated={validated} onSubmit={handleRegister}>    
                 <Row >
                     <Col xl={6} className='bg-color1'>
                         <div className='bg-title'>
@@ -35,30 +81,36 @@ const signup = () => {
                             <Col xl={12}>
                             <div className='d-flex flex-row align-items-center px-5 my-3 w-100 d-inline-block position-relative' >
                                 <i className="bi bi-person position-absolute"></i>
-                                <input type="text" className='px-4 py-2 text-color3 input-underline' placeholder= 'Enter your firstname'/>                                
+                                <input type="text" name='firstname' className='px-4 py-2 text-color3 input-underline' placeholder= 'Enter your firstname' required/>                                
                             </div>
                             <span className="underline"></span>
+                            {error!==null && error.firstname ? <Form.Control.Feedback type="invalid"></Form.Control.Feedback> : '' }
                             </Col>
                             <Col xl={12}>
                             <div className='d-flex flex-row align-items-center px-5 my-3 w-100 d-inline-block position-relative' >
                                 <i className="bi bi-person position-absolute"></i>
-                                <input type="text" className='px-4 py-2 text-color3 input-underline' placeholder= 'Enter your lastname'/>
+                                <input type="text" name='lastname' className='px-4 py-2 text-color3 input-underline' placeholder= 'Enter your lastname' required/>
                             </div>
                             <span className="underline"></span>
+                            {error!==null && error.lastname ? <Form.Control.Feedback type="invalid"></Form.Control.Feedback> : '' }
                             </Col>
                             <Col xl={12}>
                             <div className='d-flex flex-row align-items-center px-5 my-3 w-100 d-inline-block position-relative' >
                                 <i className="bi bi-envelope position-absolute"></i>
-                                <input type="text" className='px-4 py-2 text-color3 input-underline' placeholder= 'Enter your e-mail'/>
+                                <input type="text" name='email' className='px-4 py-2 text-color3 input-underline' placeholder= 'Enter your e-mail' required />
                             </div>
                             <span className="underline"></span>
+                            {error!==null && error.email ? <Form.Control.Feedback type="invalid"></Form.Control.Feedback> : '' }
                             </Col>
                             <Col xl={12}>
                             <div className='d-flex flex-row align-items-center px-5 my-3 w-100 d-inline-block position-relative' >
                                 <i className="bi bi-lock position-absolute"></i>
-                                <input type="text" className='px-4 py-2 text-color3 input-underline' placeholder= 'Create your password'/>
+                                <input type="password" name='password' className='px-4 py-2 text-color3 input-underline' placeholder= 'Create your password' required/>
                             </div>
                             <span className="underline"></span>
+                            {error!==null && error.password ? <Form.Control.Feedback type="invalid">
+            Please provide a valid city.
+          </Form.Control.Feedback> : '' }
                             </Col>
                             <Col xl={12} className='mt-2 px-5 g-0 text-end'>
                                 <div className='mx-4 my-2'>
@@ -78,8 +130,9 @@ const signup = () => {
                         </Row>                       
                     </Col>
                 </Row>
+            </Form>  
         </div>
     )
 }
 
-export default signup
+export default Register

@@ -7,6 +7,7 @@ import { BsArrowRight } from "react-icons/bs"
 import Link from "next/link"
 import profiles from '../styles/profil.module.scss'
 import Head from "next/head"
+import Footer from "../components/Footer"
 
 const profile = () => {
     return (
@@ -95,6 +96,7 @@ const profile = () => {
                 </Col>
             </Row>
         </Container>
+        <Footer />
         </>
     )
 }
