@@ -12,22 +12,23 @@ const Register = () => {
     const dispatch = useDispatch()
     const router = useRouter()
     const [success,setSuccess] = useState()
+    const [validated, setValidated] = useState(false);
     
     const validation = (data)=>{
-        const errors = {}
+        const error = {}
         if(!data.firstname || data.firstname===''){
-            errors.firstname = 'Firstname must be filled'
+            error.firstname = 'Firstname must be filled'
         }
         if(!data.lastname || data.lastname===''){
-            errors.lastname = 'Lastname must be filled'
+            error.lastname = 'Lastname must be filled'
         }
         if(!data.email || data.firstnam===''){
-            errors.email = 'Email must be filled'
+            error.email = 'Email must be filled'
         }
         if(!data.password || data.password===''){
-            errors.password = 'Password must be filled'
+            error.password = 'Password must be filled'
         }
-        return errors;
+        return error;
     }
 
     const handleRegister = (event)=>{
@@ -40,6 +41,7 @@ const Register = () => {
         var valid = validation(data)
         if(Object.keys(valid).length > 0){
             setError(valid)
+            setValidated(false)
         }else{
             dispatch(getDataRegister(data))
             router.push('/createpin')
@@ -48,7 +50,7 @@ const Register = () => {
 
     return (
         <div className='container-fluid'>
-            <Form onSubmit={handleRegister}>    
+            <Form validated={validated} onSubmit={handleRegister}>    
                 <Row >
                     <Col xl={6} className='bg-color1'>
                         <div className='bg-title'>
@@ -79,33 +81,36 @@ const Register = () => {
                             <Col xl={12}>
                             <div className='d-flex flex-row align-items-center px-5 my-3 w-100 d-inline-block position-relative' >
                                 <i className="bi bi-person position-absolute"></i>
-                                <input type="text" name='firstname' className='px-4 py-2 text-color3 input-underline' placeholder= 'Enter your firstname'/>                                
+                                <input type="text" name='firstname' className='px-4 py-2 text-color3 input-underline' placeholder= 'Enter your firstname' required/>                                
                             </div>
                             <span className="underline"></span>
-                            {error!==null && error.firstname ? <div className={input.error}>{error.firstname}</div> : '' }
+                            {error!==null && error.firstname ? <Form.Control.Feedback type="invalid"></Form.Control.Feedback> : '' }
                             </Col>
                             <Col xl={12}>
                             <div className='d-flex flex-row align-items-center px-5 my-3 w-100 d-inline-block position-relative' >
                                 <i className="bi bi-person position-absolute"></i>
-                                <input type="text" name='lastname' className='px-4 py-2 text-color3 input-underline' placeholder= 'Enter your lastname'/>
+                                <input type="text" name='lastname' className='px-4 py-2 text-color3 input-underline' placeholder= 'Enter your lastname' required/>
                             </div>
                             <span className="underline"></span>
-                            {error!==null && error.firstname ? <div className={input.error}>{error.firstname}</div> : '' }
+                            {error!==null && error.lastname ? <Form.Control.Feedback type="invalid"></Form.Control.Feedback> : '' }
                             </Col>
                             <Col xl={12}>
                             <div className='d-flex flex-row align-items-center px-5 my-3 w-100 d-inline-block position-relative' >
                                 <i className="bi bi-envelope position-absolute"></i>
-                                <input type="text" name='email' className='px-4 py-2 text-color3 input-underline' placeholder= 'Enter your e-mail'/>
+                                <input type="text" name='email' className='px-4 py-2 text-color3 input-underline' placeholder= 'Enter your e-mail' required />
                             </div>
                             <span className="underline"></span>
-                            {error!==null && error.firstname ? <div className={input.error}>{error.firstname}</div> : '' }
+                            {error!==null && error.email ? <Form.Control.Feedback type="invalid"></Form.Control.Feedback> : '' }
                             </Col>
                             <Col xl={12}>
                             <div className='d-flex flex-row align-items-center px-5 my-3 w-100 d-inline-block position-relative' >
                                 <i className="bi bi-lock position-absolute"></i>
-                                <input type="password" name='password' className='px-4 py-2 text-color3 input-underline' placeholder= 'Create your password'/>
+                                <input type="password" name='password' className='px-4 py-2 text-color3 input-underline' placeholder= 'Create your password' required/>
                             </div>
                             <span className="underline"></span>
+                            {error!==null && error.password ? <Form.Control.Feedback type="invalid">
+            Please provide a valid city.
+          </Form.Control.Feedback> : '' }
                             </Col>
                             <Col xl={12} className='mt-2 px-5 g-0 text-end'>
                                 <div className='mx-4 my-2'>
