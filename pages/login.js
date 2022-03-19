@@ -1,9 +1,49 @@
-import {Col, Row, Container} from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import { loginProcess } from '../redux/actions/auth'
+import React, { useState } from 'react'
+import { useRouter } from 'next/router'
+import {Col, Row, Container, Form} from 'react-bootstrap'
 import Image from 'next/image'
 import Link from 'next/link'
 import Head from 'next/head'
 
-const login = () => {
+const Login = () => {
+    const {auth} = useSelector(state=>state)
+    const dispatch = useDispatch()
+    const [error, setError] = useState({})
+    const router = useRouter()
+
+    const validation = (data)=>{
+        const newErrors = {}
+        if(!data.email || data.email===''){
+            newErrors.email = 'Email must be filled'
+        }
+
+        if(!data.password || data.password===''){
+            newErrors.password = 'Password must be filled'
+        }
+        return newErrors;
+    }
+
+    const handleLogin = (event)=>{
+        console.log("masuk!!")
+        event.preventDefault()
+        var email = event.target.elements["email"].value;
+        var password =  event.target.elements["password"].value;
+        var data = {email,password}
+        var validate = validation(data)
+
+        if(Object.keys(validate).length > 0){
+            setError(validate)
+        }
+        else{
+            dispatch(loginProcess(email,password))           
+            if(!auth.isError){
+                router.push('/home')
+            }
+        }
+         
+    }
     return (
         <>
         <Head>
@@ -11,7 +51,8 @@ const login = () => {
         <meta name="description" content="Next Wallet your future wallet" />
         <link rel="icon" href="/favicon.ico" />
         </Head>
-        <div className='container-fluid'>          
+        <div className='container-fluid'>
+            <Form onSubmit={handleLogin}>       
                 <Row >
                     <Col xl={6} className='bg-color1 log-1'>
                         <div className='bg-title'>
@@ -42,7 +83,7 @@ const login = () => {
                             <Col xl={12}>
                             <div className='d-flex flex-row align-items-center px-5 my-3 w-100 d-inline-block position-relative' >
                                 <i className="bi bi-envelope position-absolute"></i>
-                                <input type="text" className='px-4 py-2 text-color3 input-underline' placeholder= 'Enter your e-mail'/>
+                                <input type="text" name='email' className='px-4 py-2 text-color3 input-underline' placeholder= 'Enter your e-mail'/>
                                 
                             </div>
                             <span className="underline"></span>
@@ -50,7 +91,7 @@ const login = () => {
                             <Col xl={12}>
                             <div className='d-flex flex-row align-items-center px-5 my-3 w-100 d-inline-block position-relative' >
                                 <i className="bi bi-lock position-absolute"></i>
-                                <input type="text" className='px-4 py-2 text-color3 input-underline' placeholder= 'Enter your password'/>
+                                <input type="password" name='password' className='px-4 py-2 text-color3 input-underline' placeholder= 'Enter your password'/>
                             </div>
                             <span className="underline"></span>
                             </Col>
@@ -64,17 +105,18 @@ const login = () => {
                                 </div>
                             </Col>
                             <Col xl={12} className='text-center '>
-                                <button className='bg-color3 btn-login mt-3'>Login</button>
+                                <button type='submit' className='bg-color3 btn-login mt-3'>Login</button>
                             </Col>
                             <Col>
-                                <div className='mt-4 px-5 text-center '>Don’t have an account? Let’s <Link href="/signup" ><a className='text-decoration-none text-color3'> Sign Up</a></Link></div>
+                                <div className='mt-4 px-5 text-center '>Don’t have an account? Let’s <Link href="/register" ><a className='text-decoration-none text-color3'> Sign Up</a></Link></div>
                             </Col>
                         </Row>                       
                     </Col>
                 </Row>
-            </div>
+            </Form>
+        </div>
         </>
     )
 }
 
-export default login
+export default Login
