@@ -13,7 +13,7 @@ const SidePart = ()=> {
         setActive(route.pathname)
     }, [route.pathname])
     const variation = [
-        {link: '/', name: 'Dashboard', icon: BsGrid},
+        {link: '/home', name: 'Dashboard', icon: BsGrid},
         {link: '/transfer', name: 'Transfer', icon: HiOutlineArrowUp},
         {link: '/topup', name: 'Topup', icon: HiOutlinePlus},
         {link: '/profile', name: 'Profile', icon: FiUser},
