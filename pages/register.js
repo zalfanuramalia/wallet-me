@@ -1,10 +1,54 @@
-import {Col, Row, Container} from 'react-bootstrap'
+import {Col, Row, Form} from 'react-bootstrap'
+import React, { useState } from 'react'
+import { useRouter } from 'next/router'
 import Image from 'next/image'
 import Link from 'next/link'
+import { getDataRegister } from "../redux/actions/register";
+import { useDispatch, useSelector } from 'react-redux'
 
-const signup = () => {
+const Register = () => {
+    const register = useSelector(state => state.register)
+    const [error,setError] = useState({})
+    const dispatch = useDispatch()
+    const router = useRouter()
+    const [success,setSuccess] = useState()
+    
+    const validation = (data)=>{
+        const errors = {}
+        if(!data.firstname || data.firstname===''){
+            errors.firstname = 'Firstname must be filled'
+        }
+        if(!data.lastname || data.lastname===''){
+            errors.lastname = 'Lastname must be filled'
+        }
+        if(!data.email || data.firstnam===''){
+            errors.email = 'Email must be filled'
+        }
+        if(!data.password || data.password===''){
+            errors.password = 'Password must be filled'
+        }
+        return errors;
+    }
+
+    const handleRegister = (event)=>{
+        event.preventDefault()
+        var data = {};
+        data.firstname = event.target.elements["firstname"].value;
+        data.lastname = event.target.elements["lastname"].value;
+        data.email = event.target.elements["email"].value;
+        data.password = event.target.elements["password"].value;
+        var valid = validation(data)
+        if(Object.keys(valid).length > 0){
+            setError(valid)
+        }else{
+            dispatch(getDataRegister(data))
+            router.push('/createpin')
+        }
+    }
+
     return (
-        <div className='container-fluid'>          
+        <div className='container-fluid'>
+            <Form onSubmit={handleRegister}>    
                 <Row >
                     <Col xl={6} className='bg-color1'>
                         <div className='bg-title'>
@@ -35,28 +79,31 @@ const signup = () => {
                             <Col xl={12}>
                             <div className='d-flex flex-row align-items-center px-5 my-3 w-100 d-inline-block position-relative' >
                                 <i className="bi bi-person position-absolute"></i>
-                                <input type="text" className='px-4 py-2 text-color3 input-underline' placeholder= 'Enter your firstname'/>                                
+                                <input type="text" name='firstname' className='px-4 py-2 text-color3 input-underline' placeholder= 'Enter your firstname'/>                                
                             </div>
                             <span className="underline"></span>
+                            {error!==null && error.firstname ? <div className={input.error}>{error.firstname}</div> : '' }
                             </Col>
                             <Col xl={12}>
                             <div className='d-flex flex-row align-items-center px-5 my-3 w-100 d-inline-block position-relative' >
                                 <i className="bi bi-person position-absolute"></i>
-                                <input type="text" className='px-4 py-2 text-color3 input-underline' placeholder= 'Enter your lastname'/>
+                                <input type="text" name='lastname' className='px-4 py-2 text-color3 input-underline' placeholder= 'Enter your lastname'/>
                             </div>
                             <span className="underline"></span>
+                            {error!==null && error.firstname ? <div className={input.error}>{error.firstname}</div> : '' }
                             </Col>
                             <Col xl={12}>
                             <div className='d-flex flex-row align-items-center px-5 my-3 w-100 d-inline-block position-relative' >
                                 <i className="bi bi-envelope position-absolute"></i>
-                                <input type="text" className='px-4 py-2 text-color3 input-underline' placeholder= 'Enter your e-mail'/>
+                                <input type="text" name='email' className='px-4 py-2 text-color3 input-underline' placeholder= 'Enter your e-mail'/>
                             </div>
                             <span className="underline"></span>
+                            {error!==null && error.firstname ? <div className={input.error}>{error.firstname}</div> : '' }
                             </Col>
                             <Col xl={12}>
                             <div className='d-flex flex-row align-items-center px-5 my-3 w-100 d-inline-block position-relative' >
                                 <i className="bi bi-lock position-absolute"></i>
-                                <input type="text" className='px-4 py-2 text-color3 input-underline' placeholder= 'Create your password'/>
+                                <input type="password" name='password' className='px-4 py-2 text-color3 input-underline' placeholder= 'Create your password'/>
                             </div>
                             <span className="underline"></span>
                             </Col>
@@ -78,8 +125,9 @@ const signup = () => {
                         </Row>                       
                     </Col>
                 </Row>
+            </Form>  
         </div>
     )
 }
 
-export default signup
+export default Register
