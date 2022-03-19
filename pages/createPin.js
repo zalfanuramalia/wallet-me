@@ -1,14 +1,30 @@
-import {Col, Row, Container} from 'react-bootstrap'
+import {Col, Row, Container, Form} from 'react-bootstrap'
+import { useRouter } from 'next/router'
 import Image from 'next/image'
 import OtpInput from 'react-otp-input';
 import { useState } from 'react';
 import createpin from '../styles/createpin.module.scss'
+import { connect, useSelector } from 'react-redux'
+import { registerProcess } from "../redux/actions/register";
 
-const CreatePin = () => {
+const CreatePin = ({registerProcess}) => {
+    const register = useSelector(state => state.register)
+    const [pin,setPin] = useState(0)
+    const [error,setError] = useState(false)
+    const router = useRouter()
+    
+    const handlePin = (event)=>{
+        event.preventDefault()
+        console.log(register.data)
+        console.log("pin"+pin)
+        registerProcess(register.data,pin)
+        router.push('/account-created')
+    }
     const [otp, setOtp] = useState('')
     return (
         
-        <div className='container-fluid log'>          
+        <div className='container-fluid log'>
+            <Form onSubmit={handlePin}>        
                 <Row >
                     <Col xl={6} className='bg-color1 log-1'>
                         <div className='bg-title'>
@@ -48,13 +64,16 @@ const CreatePin = () => {
                                 </div>
                             </Col>                            
                             <Col xl={12} className='text-center mt-4'>
-                                <button className='bg-color3 btn-login mt-3'>Confirm</button>
+                                <button type='submit' className='bg-color3 btn-login mt-3'>Confirm</button>
                             </Col>                            
                         </Row>                       
                     </Col>
                 </Row>
+            </Form>
         </div>
     )
 }
 
-export default CreatePin
+const mapStateToProps = state => ({register:state.register})
+const mapDispatchToProps = {registerProcess}
+export default connect(mapStateToProps,mapDispatchToProps)(CreatePin)
