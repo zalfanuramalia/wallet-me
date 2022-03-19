@@ -5,9 +5,12 @@ import {BsGrid} from 'react-icons/bs'
 import {HiOutlineArrowUp, HiOutlinePlus} from 'react-icons/hi'
 import {FiUser} from 'react-icons/fi'
 import {MdLogout} from "react-icons/md"
+import Modals from '../components/ModalsTopup'
+import React from 'react'
 import confirmations from "../styles/confirmation.module.scss";
 
 const SidePart = ()=> {
+    const [modalShow, setModalShow] = React.useState(false);
     const route = useRouter()
     const [active, setActive] = useState('/')
     useEffect(()=>{
@@ -52,7 +55,12 @@ const SidePart = ()=> {
                 <li key={item.name} >
                     <Link href={item.link}>
                         <a className={`d-flex flex-row align-items-center mt-4 ${active===item.link?'active':'' }`}>
-                           <div><span className='px-3'><Icon  /></span> {item.name}</div> 
+                            {item.name === "Topup" &&
+                           <div onClick={()=>setModalShow(true)}><span className='px-3'><Icon  /></span> {item.name}</div>}
+                           <Modals show={modalShow} onHide={() => setModalShow(false)} />
+                           {item.name !== "Topup" &&
+                           <div><span className='px-3'><Icon  /></span> {item.name}</div>
+                           }
                         </a>
                     </Link>
                 </li>
