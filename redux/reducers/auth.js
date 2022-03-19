@@ -29,30 +29,26 @@ const auth = (state = dataLogin, action) => {
           state.errorMsg = message
           return {...state}
         }
-        case 'LOGIN_PROFILE_PENDING':
-            {
-                state.isLoading = true
-                return {...state }
-            }
-        case 'LOGIN_PROFILE_FULFILLED':
-            {
-                const { data } = action.payload
-                state.isLoading = false
-                state.user = data.results
-                return {...state }
-            }
-        case 'LOGOUT':
-            {
-                state.token = null
-                window.localStorage.removeItem('token')
-                state.isAuthenticated = false
-                state.isVerify = false
-                return {...state }
-            }
-        default:
-            {
-                return {...state }
-            }
+        case 'GET_USER_PENDING': {
+            state.isLoading = true
+            return {...state }
+        }
+        case 'GET_USER_FULFILLED': {
+            const { data } = action.payload
+            state.isLoading = false
+            state.user = data.results
+            return {...state }
+        }
+        case 'LOGOUT': {
+            state.token = null
+            window.localStorage.removeItem('token')
+            state.isAuthenticated = false
+            state.isVerify = false
+            return {...state }
+        }
+        default: {
+            return {...state }
+        }
     }
 }
 

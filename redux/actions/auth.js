@@ -11,7 +11,7 @@ export const loginProcess = (email, password) => {
 
 export const getDataUsers = (token) => {
     return {
-        type: 'LOGIN_USER',
+        type: 'GET_USER',
         payload: http(token).get('/users')
     }
 }

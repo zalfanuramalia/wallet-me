@@ -3,6 +3,7 @@ import NavbarComponent from "../components/NavbarHome"
 import SidePart from "../components/SidePart"
 import Image from "next/image"
 import BarCharts from "../components/BarCharts"
+import Head from "next/head"
 
 export default function Dashboard() {
   return (
@@ -28,6 +29,11 @@ export default function Dashboard() {
             }
         `}
         </style>
+        <Head>
+        <title>Home</title>
+        <meta name="description" content="Next Wallet your future wallet" />
+        <link rel="icon" href="/favicon.ico" />
+        </Head>
         <NavbarComponent />
         <Container className="profiles">
             <Row>

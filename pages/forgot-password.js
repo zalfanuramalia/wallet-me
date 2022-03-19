@@ -1,48 +1,61 @@
-import {Col, Row, Container, Alert, Form} from 'react-bootstrap'
+import {Col, Row, Alert, Form} from 'react-bootstrap'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
-import React, { useState } from 'react';
-import {forgotPassProcess} from '../redux/actions/forgotPass'
-import Modals from '../components/ModalsForgotPass'
+import { useState, useEffect } from 'react';
+import {resetPassProcess} from '../redux/actions/forgotPass'
 import Head from 'next/head';
 
-const ForgotPassword = () => {
+const ResetPassword = () => {
     const {forgotPass} = useSelector(state=>state)
     const [error,setError] = useState({})
     const dispatch = useDispatch()
     const [success,setSuccess] = useState(false)
-    const router = useRouter()    
-    const [modalShow, setModalShow] = React.useState(false);
+    const router = useRouter()
 
-    const validation = (email)=>{
+    useEffect(()=>{
+        if(success){
+            <Alert variant="success" onClose={() => setShow(false)} dismissible>
+            <Alert.Heading>Success</Alert.Heading>
+            <p>{forgotPass.message}</p>
+          </Alert>
+        }
+    },[success])
+
+
+    const validation = (data)=>{
         const newErrors = {}
-        if(!email || email===''){
-            newErrors.email = 'Email must be filled'
+        if(!data.password || data.password===''){
+            newErrors.password = 'Password must be filled'
+        }
+        if(!data.confirmpass || data.confirmpass===''){
+            newErrors.password = 'Confirm Password must be filled'
         }
         return newErrors;
     }
 
-    const passHandle = (event)=>{
+    const newPassHandle = (event)=>{
         event.preventDefault()
-        const email = event.target.elements["email"].value
-        var valid = validation(email)
+        const data = {}
+        data.password = event.target.elements["password"].value
+        data.confirmpass = event.target.elements["confirmpass"].value
+        var valid = validation(data)
         if(Object.keys(valid).length > 0){
             setError(valid)
         }else{
-            dispatch(forgotPassProcess(email))
+            dispatch(resetPassProcess(data))
             setSuccess(true)
         }
     }
     return (
         <>
         <Head>
-        <title>Forgot Password</title>
+        <title>Reset Password</title>
         <meta name="description" content="Next Wallet your future wallet" />
         <link rel="icon" href="/favicon.ico" />
         </Head>
         <div className='container-fluid log'>
-            <Form onSubmit={passHandle}>                
+            <Form onSubmit={newPassHandle}>        
                 <Row >
                     <Col xl={6} className='bg-color1 log-1'>
                         <div className='bg-title'>
@@ -66,22 +79,26 @@ const ForgotPassword = () => {
                         </h3>
                         </div>
                         
-                        <p className='mx-5 mt-4 '>To reset your password, you must type your e-mail and we will send a link to your email and you will be directed to the reset password screens.</p>
+                        <p className='mx-5 mt-4 '>Now you can create a new password for your Zwallet account. Type your password twice so we can confirm your new passsword.</p>
                         <Row>
                             <Col xl={12}>
                             <div className='d-flex flex-row align-items-center px-5 my-4 w-100 d-inline-block position-relative' >
-                                <i className="bi bi-envelope position-absolute"></i>
-                                <input type="text" name='email' className='px-4 py-2 text-color3 input-underline' placeholder= 'Enter your e-mail'/>
-                                {error!==null && error.firstname ? <Form.Control.Feedback type="invalid"></Form.Control.Feedback> : '' }                             
+                                <i className="bi bi-lock position-absolute"></i>
+                                <input type="password" name='password' className='px-4 py-2 text-color3 input-underline' placeholder= 'Create new password'/>
+                                {error!==null && error.password ? <Form.Control.Feedback type="invalid"></Form.Control.Feedback> : '' }                             
                             </div>
                             <span className="underline"></span>
-                            </Col>                            
+                            </Col>
+                            <Col xl={12}>
+                            <div className='d-flex flex-row align-items-center px-5 my-4 w-100 d-inline-block position-relative' >
+                                <i className="bi bi-lock position-absolute"></i>
+                                <input type="password" name='confirmpass' className='px-4 py-2 text-color3 input-underline' placeholder= 'Confirm new password'/>
+                                {error!==null && error.confirmpass ? <Form.Control.Feedback type="invalid"></Form.Control.Feedback> : '' }                             
+                            </div>
+                            <span className="underline"></span>
+                            </Col>                          
                             <Col xl={12} className='text-center mt-4'>
-                                <button onClick={()=>setModalShow(true)} type='submit' className='bg-color3 btn-login mt-3'>Confirm</button>
-                                {
-                                    forgotPass.isError === 'false' &&
-                                    <Modals show={modalShow} onHide={() => setModalShow(false)} />
-                                }     
+                                <button type='submit' className='bg-color3 btn-login mt-3'>Reset Password</button>
                             </Col>                            
                         </Row>                       
                     </Col>
@@ -92,4 +109,4 @@ const ForgotPassword = () => {
     )
 }
 
-export default ForgotPassword
+export default ResetPassword
