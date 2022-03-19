@@ -3,6 +3,7 @@ import NavbarComponent from "../components/NavbarHome"
 import SidePart from "../components/SidePart"
 import {BsSearch} from "react-icons/bs"
 import Image from "next/image"
+import Head from "next/head"
 
 const transfer = () => {
     return (
@@ -16,6 +17,11 @@ const transfer = () => {
             
         `}
         </style>
+        <Head>
+        <title>Top Up</title>
+        <meta name="description" content="Next Wallet your future wallet" />
+        <link rel="icon" href="/favicon.ico" />
+        </Head>
         <NavbarComponent />
         <Container>
             <Row>

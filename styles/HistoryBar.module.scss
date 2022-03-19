@@ -1,0 +1,24 @@
+$primary: #DED0C1;
+$font-family : 'Nunito Sans';
+
+.information {
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+    border-radius: 25px;
+}
+
+.redInfo {
+    color: #FF5B37;
+}
+
+.greenInfo {
+    color: #1EC15F
+}
+
+.select:after {
+    display: none !important;
+}
+
+.select {
+    border-radius: 10px;
+    background-color: #FAF6F8;
+}
