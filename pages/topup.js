@@ -4,8 +4,32 @@ import SidePart from "../components/SidePart"
 import {BsSearch} from "react-icons/bs"
 import Image from "next/image"
 import Head from "next/head"
+import { useSelector } from "react-redux"
+import { useEffect } from "react"
+import { addBalance } from "../redux/actions/topup"
 
-const transfer = () => {
+const Topup = () => {
+    const {auth, topup} = useSelector(state=>state)
+
+    const validation = (amount)=>{
+        const error = {}
+        if(!amount || amount===''){
+            error.amount = 'Amount must be filled'
+        }
+        return error;
+    }
+
+    const topupHandle = (event)=>{
+        event.preventDefault()
+        const amount = event.target.elements["amount"].value
+        var valid = validation(amount)
+        if(Object.keys(valid).length > 0){
+            setError(valid)
+        }else{
+            dispatch(addBalance(amount, auth.token))
+            setSuccess(true)
+        }
+    }
     return (
         <>
         <style jsx>
@@ -99,4 +123,4 @@ const transfer = () => {
     )
 }
 
-export default transfer
+export default Topup
