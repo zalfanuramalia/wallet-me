@@ -1,5 +1,6 @@
 const dataLogin = {
     token: null,
+    balance: 0,
     userData: {},
     isLoading: false,
     isError: false,
@@ -15,7 +16,6 @@ const auth = (state = dataLogin, action) => {
         }
         case 'AUTH_LOGIN_FULFILLED': {
             const {data} = action.payload
-            console.log(data)
             state.isLoading = false
             state.isError = false
             state.token = data.results.token
@@ -29,17 +29,34 @@ const auth = (state = dataLogin, action) => {
           state.errorMsg = message
           return {...state}
         }
-        case 'GET_USER_PENDING': {
+        case 'GET_PROFILE_PENDING': {
             state.isLoading = true
             return {...state }
         }
-        case 'GET_USER_FULFILLED': {
+        case 'GET_PROFILE_FULFILLED': {
             const { data } = action.payload
             state.isLoading = false
-            state.user = data.results
+            state.userData = data.results
             return {...state }
         }
-        case 'LOGOUT': {
+        case 'GET_BALANCE_PENDING': {
+            state.isLoading = true
+            return {...state }
+        }
+        case 'GET_BALANCE_FULFILLED': {
+            const { data } = action.payload
+            state.isLoading = false
+            state.balance = data.results
+            return {...state }
+        }
+        case 'GET_BALANCE_REJECTED': {
+            const {message} = action.payload.response.data
+            state.isLoading = false
+            state.isError = true
+            state.errorMsg = message
+            return {...state}
+          }
+        case 'AUTH_LOGOUT': {
             state.token = null
             window.localStorage.removeItem('token')
             state.isAuthenticated = false
