@@ -5,6 +5,9 @@ import SidePart from "../components/SidePart"
 import Image from "next/image"
 import { VscEdit } from "react-icons/vsc"
 import { BsArrowRight } from "react-icons/bs"
+import Link from "next/link"
+import profiles from '../styles/profil.module.scss'
+import Head from "next/head"
 import Footer from "../components/Footer"
 import { useDispatch, useSelector } from 'react-redux'
 import React, { useEffect, useRef, useState } from 'react'
@@ -121,7 +124,7 @@ const Profile = () => {
                         <div className="text-center mt-5">
                             <Image id='profile-image' src={auth.userData.picture || photo} width={90} height={70} alt="profile" className="me-3 rounded-full"/>
                         </div>
-                        <div className="d-flex flex-row justify-content-center px-3 mt-1">
+                        <div className="d-flex flex-row justify-content-center px-3 mt-1 mb-2">
                             <span><VscEdit /></span>
                             <div onClick={(e) => uploadFile(e)} className="px-3">Edit</div>
                             <input type="file"
@@ -139,23 +142,41 @@ const Profile = () => {
                             <Button className='bg-color1 text-color4 btn-login mt-1 d-flex flex-row justify-content-between align-items-center'>
                                 <div>Personal Information</div>
                                 <div><BsArrowRight /></div>
+                        <div className="text-center mt-3 text-name">Robert Chandler</div>
+                        <div className="text-center mt-1 mb-3 text-phone text-color3">+62 813-9387-7946</div>
+                        <div className="text-center">
+                            <Button className={`mt-3 text-center bg-color1 ${profiles.btnlogin}`}>
+                                <Link href="/profile/personal-information">
+                                    <a className='bg-color1 text-color4 text-decoration-none d-flex flex-row justify-content-between align-items-center'>
+                                        <div>Personal Information</div>
+                                        <div><BsArrowRight /></div>
+                                    </a>
+                                </Link>                                
                             </Button>
                         </div>
-                        <div className="mt-3 mb-3 d-flex flex-row justify-content-center">
-                            <Button className='bg-color1 text-color4 btn-login mt-1 d-flex flex-row justify-content-between align-items-center'>
-                                <div>Change Password</div>
-                                <div><BsArrowRight /></div>
+                        <div className="text-center">
+                            <Button className={`mt-3 text-center bg-color1 ${profiles.btnlogin}`}>
+                                <Link href="/profile/change-password">
+                                    <a className='bg-color1 text-color4 text-decoration-none d-flex flex-row justify-content-between align-items-center'>
+                                        <div>Change Password</div>
+                                        <div><BsArrowRight /></div>
+                                    </a>
+                                </Link>                                
                             </Button>
                         </div>
-                        <div className=" mb-3 d-flex flex-row justify-content-center">
-                            <Button className='bg-color1 text-color4 btn-login mt-1 d-flex flex-row justify-content-between align-items-center'>
-                                <div>Change Pin</div>
-                                <div><BsArrowRight /></div>
+                        <div className="text-center">
+                            <Button className={`mt-3 text-center bg-color1 ${profiles.btnlogin}`}>
+                                <Link href="/profile/change-pin">
+                                    <a className='bg-color1 text-color4 text-decoration-none d-flex flex-row justify-content-between align-items-center'>
+                                        <div>Change Pin</div>
+                                        <div><BsArrowRight /></div>
+                                    </a>
+                                </Link>                                
                             </Button>
                         </div>
-                        <div className="mb-5 d-flex flex-row justify-content-center">
-                            <Button className='bg-color1 text-color4 btn-login mt-1 d-flex flex-row justify-content-between align-items-center'>
-                                <div>Logout</div>
+                        <div className="text-center">
+                            <Button className={`mt-3 mb-5 text-color4 bg-color1 ${profiles.btnlogin}`}>
+                                <div className="d-flex flex-row justify-content-between">Logout</div>
                             </Button>
                         </div>
                     </Card>
