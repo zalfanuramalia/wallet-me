@@ -7,7 +7,7 @@ import {resetPassProcess} from '../redux/actions/forgotPass'
 import Head from 'next/head';
 
 const ResetPassword = () => {
-    const {forgotPass} = useSelector(state=>state)
+    const {auth, forgotPass} = useSelector(state=>state)
     const [error,setError] = useState({})
     const dispatch = useDispatch()
     const [success,setSuccess] = useState(false)
@@ -25,11 +25,11 @@ const ResetPassword = () => {
 
     const validation = (data)=>{
         const newErrors = {}
-        if(!data.password || data.password===''){
+        if(!data.newPassword || data.newPassword===''){
             newErrors.password = 'Password must be filled'
         }
-        if(!data.confirmpass || data.confirmpass===''){
-            newErrors.password = 'Confirm Password must be filled'
+        if(!data.confirmPassword || data.confirmPassword===''){
+            newErrors.confirmPassword = 'Confirm Password must be filled'
         }
         return newErrors;
     }
@@ -37,15 +37,24 @@ const ResetPassword = () => {
     const newPassHandle = (event)=>{
         event.preventDefault()
         const data = {}
-        data.password = event.target.elements["password"].value
-        data.confirmpass = event.target.elements["confirmpass"].value
+        data.newPassword = event.target.elements["newPassword"].value
+        data.confirmPassword = event.target.elements["confirmPassword"].value
         var valid = validation(data)
-        if(Object.keys(valid).length > 0){
+        if(Object.keys(valid).length > 0 ){
             setError(valid)
-        }else{
-            dispatch(resetPassProcess(data))
+        } else{
+            const datas = {
+                otp: router.query.otp, newPassword: data.newPassword, confirmPassword: data.confirmPassword
+            }
+            dispatch(resetPassProcess(datas))
+            if(!auth.isError){
+                router.push('/login')
+              }else if(auth.isError){
+                setError(valid)
+              }
             setSuccess(true)
         }
+
     }
     return (
         <>
@@ -84,7 +93,7 @@ const ResetPassword = () => {
                             <Col xl={12}>
                             <div className='d-flex flex-row align-items-center px-5 my-4 w-100 d-inline-block position-relative' >
                                 <i className="bi bi-lock position-absolute"></i>
-                                <input type="password" name='password' className='px-4 py-2 text-color3 input-underline' placeholder= 'Create new password'/>
+                                <input type="password" name='newPassword' className='px-4 py-2 text-color3 input-underline' placeholder= 'Create new password'/>
                                 {error!==null && error.password ? <Form.Control.Feedback type="invalid"></Form.Control.Feedback> : '' }                             
                             </div>
                             <span className="underline"></span>
@@ -92,7 +101,7 @@ const ResetPassword = () => {
                             <Col xl={12}>
                             <div className='d-flex flex-row align-items-center px-5 my-4 w-100 d-inline-block position-relative' >
                                 <i className="bi bi-lock position-absolute"></i>
-                                <input type="password" name='confirmpass' className='px-4 py-2 text-color3 input-underline' placeholder= 'Confirm new password'/>
+                                <input type="password" name='confirmPassword' className='px-4 py-2 text-color3 input-underline' placeholder= 'Confirm new password'/>
                                 {error!==null && error.confirmpass ? <Form.Control.Feedback type="invalid"></Form.Control.Feedback> : '' }                             
                             </div>
                             <span className="underline"></span>

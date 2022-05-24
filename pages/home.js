@@ -4,8 +4,18 @@ import SidePart from "../components/SidePart"
 import Image from "next/image"
 import BarCharts from "../components/BarCharts"
 import Head from "next/head"
+import Link from "next/link"
+import styles from '../styles/home.module.scss'
+import { connect, useSelector } from "react-redux"
+import { useEffect } from "react"
+import { getBalance } from "../redux/actions/auth"
 
-export default function Dashboard() {
+const Dashboard = ({getBalance}) => {
+  const {auth} = useSelector(state=>state)
+
+  useEffect(()=>{ 
+      getBalance(auth.token)
+  },[])
   return (
     <>
         <style jsx>
@@ -35,7 +45,7 @@ export default function Dashboard() {
         <link rel="icon" href="/favicon.ico" />
         </Head>
         <NavbarComponent />
-        <Container className="profiles">
+        <Container className='profiles mb-5'>
             <Row>
                 <Col xl={3}>
                     <Card className="radius mt-5 position-relative shadow-lg border border-top-0 border-start-0 border-end-0 border-5 border-bottom ">
@@ -43,33 +53,41 @@ export default function Dashboard() {
                     </Card>
                 </Col>
                 <Col xl={9}>
-                    <Card className="mt-5 position-relative shadow-lg border border-top-0 border-start-0 border-end-0 border-5 border-bottom ">
+                    <Card className={`${styles.profiles} mt-5 position-relative shadow-lg border border-top-0 border-start-0 border-end-0 border-5 border-bottom `}>
                         <div className='banner d-flex flex-row justify-content-between'>
-                            <div className="section">
+                            <div className="section mx-5 mt-3 mb-3">
                                 <div>Balance</div>
-                                <h3>Rp120.000</h3>
+                                <h3>{auth.userData!==null &&`Rp.${auth.balance!==null && auth.balance.toLocaleString('id-ID')}`}</h3>
                                 <div>+62 813-9387-7946</div>
                             </div>
-                            <div className='section text-center'>
-                                <div className='mb-2'>
-                                    <button className='button'>Transfer</button> 
-                                </div> 
-                                <div>
-                                    <button className='button'>Topup</button>  
+                            <div className='section text-center mx-5 mt-4 mb-3'>
+                                <div className='mb-2 text-center'>
+                                    <button className={`${styles.button} px-3 py-1 mb-2 text-center`}>
+                                        <Link href='/transfer'>
+                                            <a className="d-flex justify-content-end text-decoration-none text-color3 ">Transfer</a>
+                                        </Link>    
+                                    </button> 
+                                </div>
+                                <div className='mb-2 text-center'>
+                                    <button className={`${styles.button} px-3 py-1 mb-2 text-center`}>
+                                        <Link href='/topup'>
+                                            <a className="d-flex justify-content-end text-decoration-none text-color3 ">Top Up </a>
+                                        </Link>    
+                                    </button> 
                                 </div>
                             </div>
                         </div>
                     </Card>
                     <Row>
                         <Col xs={7}>
-                          <Card className="position-relative shadow-lg border border-top-0 border-start-0 border-end-0 border-5 border-bottom mt-3">
-                            <BarCharts data={[10,50,200,300]} labels={['1','2','3','4']} income={0} expense={0} />
+                          <Card className={`${styles.bar} position-relative shadow-lg border border-top-0 border-start-0 border-end-0 border-5 border-bottom mt-3`}>
+                            <BarCharts data={[10,50,200,300]} labels={['Sat','Sun','Mon','Tue','Fri','Sat']} income={0} expense={0} />
                           </Card>
                         </Col>
                         <Col xs={5}>
-                            <Card className="position-relative shadow-lg border border-top-0 border-start-0 border-end-0 border-5 border-bottom mt-3">
-                                <div>Transaction History</div>
-                                <Row>
+                            <Card className={`${styles.bar} position-relative shadow-lg border border-top-0 border-start-0 border-end-0 border-5 border-bottom mt-3`}>
+                                <div className="mx-3 mt-3">Transaction History</div>
+                                <Row className="mx-3 mt-4">
                                     <Col md={3}>
                                         <Image src="/images/prof-1.png"  width={60} height={60} alt="profile"  />
                                     </Col>
@@ -85,7 +103,7 @@ export default function Dashboard() {
                                         </div>
                                     </Col>
                                 </Row>
-                                <Row>
+                                <Row className="mx-3 mt-3">
                                     <Col md={3}>
                                         <Image src="/images/netflix.png"  width={60} height={60} alt="profile"  />
                                     </Col>
@@ -101,7 +119,7 @@ export default function Dashboard() {
                                         </div>
                                     </Col>
                                 </Row>
-                                <Row>
+                                <Row className="mx-3 mt-3">
                                     <Col md={3}>
                                         <Image src="/images/prof-2.png"  width={60} height={60} alt="profile"  />
                                     </Col>
@@ -117,7 +135,7 @@ export default function Dashboard() {
                                         </div>
                                     </Col>
                                 </Row>
-                                <Row>
+                                <Row className="mx-3 mt-3 mb-3">
                                     <Col md={3}>
                                         <Image src="/images/logo-history.png"  width={60} height={60} alt="profile"  />
                                     </Col>
@@ -142,3 +160,9 @@ export default function Dashboard() {
         </>
   )
 }
+
+const mapStateToProps = state => ({balance: state.balance})
+
+const mapDispatchToProps = {getBalance}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)
