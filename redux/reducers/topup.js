@@ -18,13 +18,14 @@ const topup = (state=dataTopup,action)=>{
             state.isLoading = false
             state.message = data.message
             state.isError = false
-            return {state}
+            return {...state}
         }
         case 'ADD_TOPUP_REJECTED':{
             const {data} = action.payload.response
             state.isLoading = false
             state.isError = true
             state.errMessage = data.message
+            return { ...state }
         }
         default : {
             return {...state}

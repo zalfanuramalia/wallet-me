@@ -1,5 +1,5 @@
-// import qs from 'qs'
-// import http from '../../helpers/http'
+import qs from 'qs'
+import http from '../../helpers/http'
 
 export const addBalance = (amount, token) => {
     const data = {amount}

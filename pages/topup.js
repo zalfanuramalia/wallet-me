@@ -1,35 +1,35 @@
-import { Container, Row, Col, Card } from "react-bootstrap"
+import { Container, Row, Col, Card, Form, Button } from "react-bootstrap"
 import NavbarComponent from "../components/NavbarHome"
 import SidePart from "../components/SidePart"
-import {BsSearch} from "react-icons/bs"
-import Image from "next/image"
 import Head from "next/head"
-import { useSelector } from "react-redux"
-import { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { addBalance } from "../redux/actions/topup"
+import { BsCheckCircle } from "react-icons/bs"
+import { useState } from "react"
 
 const Topup = () => {
-    const {auth, topup} = useSelector(state=>state)
-
-    const validation = (amount)=>{
-        const error = {}
-        if(!amount || amount===''){
-            error.amount = 'Amount must be filled'
-        }
-        return error;
-    }
+    const {auth} = useSelector(state=>state)
+    const dispatch = useDispatch()
+    const [errTopup, setErrTopUp] = useState(false)
+    const [successTopup, setSuccessTopUp] = useState(false)
 
     const topupHandle = (event)=>{
         event.preventDefault()
         const amount = event.target.elements["amount"].value
-        var valid = validation(amount)
-        if(Object.keys(valid).length > 0){
-            setError(valid)
-        }else{
+        if(amount < 10000){
+            setErrTopUp(true)
+          }else{
             dispatch(addBalance(amount, auth.token))
-            setSuccess(true)
-        }
+            setSuccessTopUp(true)
+          }
     }
+
+    const closeErr = () => {
+        setErrTopUp(false)
+      }
+      const closeSuccess = () => {
+        setSuccessTopUp(false)
+      }
     return (
         <>
         <style jsx>
@@ -56,69 +56,32 @@ const Topup = () => {
                 </Col>
                 <Col xl={9}>
                     <Card className="mt-5 position-relative shadow-lg border border-top-0 border-start-0 border-end-0 border-5 border-bottom radius-1">
-                        <div className="px-5 mt-3">Search Receiver</div>
-                        <div className='d-flex flex-row align-items-center px-5 my-3 w-100 d-inline-block position-relative'>
-                            <div className="position-absolute px-2"><BsSearch /></div>                            
-                            <input type="text" className='px-5 py-2 bg-color5 radius-1' placeholder= 'Search receiver here' />
-                        </div>
-                        <div className="px-5 mb-5">
-                            <Card className="mt-3 position-relative shadow-lg border border-top-0 border-start-0 border-end-0 border-5 border-bottom radius-1">
-                                <Row className="px-5 mt-3">
-                                    <Col md={2}>
-                                        <Image src="/images/prof-1.png"  width={60} height={60} alt="profile"  />
-                                    </Col>
-                                    <Col md={10}>
-                                        <div className="d-flex flex-column justify-content-center">
-                                            <div>Samuel Suhi</div>
-                                            <div>+62 813-8492-9994</div>
-                                        </div>
-                                    </Col>
-                                </Row>
-                            </Card>
-                            <Card className="mt-3 position-relative shadow-lg border border-top-0 border-start-0 border-end-0 border-5 border-bottom radius-1">
-                                <Row className="px-5 mt-3">
-                                    <Col md={2}>
-                                        <Image src="/images/prof-3.png"  width={60} height={60} alt="profile"  />
-                                    </Col>
-                                    <Col md={10}>
-                                        <div className="d-flex flex-column justify-content-center">
-                                            <div>Momo Taro</div>
-                                            <div>+62 812-4343-6731</div>
-                                        </div>
-                                    </Col>
-                                </Row>
-                            </Card>
-                            <Card className="mt-3 position-relative shadow-lg border border-top-0 border-start-0 border-end-0 border-5 border-bottom radius-1">
-                                <Row className="px-5 mt-3">
-                                    <Col md={2}>
-                                        <Image src="/images/prof-4.png"  width={60} height={60} alt="profile"  />
-                                    </Col>
-                                    <Col md={10}>
-                                        <div className="d-flex flex-column justify-content-center">
-                                            <div>Jessica Keen</div>
-                                            <div>+62 811-3452-5252</div>
-                                        </div>
-                                    </Col>
-                                </Row>
-                            </Card>
-                            <Card className="mt-3 position-relative shadow-lg border border-top-0 border-start-0 border-end-0 border-5 border-bottom radius-1">
-                                <Row className="px-5 mt-3">
-                                    <Col md={2}>
-                                        <Image src="/images/prof-5.png"  width={60} height={60} alt="profile"  />
-                                    </Col>
-                                    <Col md={10}>
-                                        <div className="d-flex flex-column justify-content-center">
-                                            <div>Michael Le</div>
-                                            <div>+62 810-4224-4613</div>
-                                        </div>
-                                    </Col>
-                                </Row>
-                            </Card>
+                        <div className="px-5 py-5 vh-75">
+                            <h1 className='fs-5'>Top Up</h1>
+                            <p>Enter the amount of money, and click submit</p>
+                            <Form onSubmit={topupHandle} className='text-end'>
+                                <Form.Control type='number' name='amount' variant='border' />
+                                <button type='submit' className='bg-color3 text-end mt-3'>Submit</button>
+                            </Form>
                         </div>
                     </Card>
                 </Col>
             </Row>
         </Container>
+        {errTopup && <div className='bg-secondary bg-opacity-10 position-absolute top-0 d-flex justify-content-center align-items-center vh-100 vw-100' onClick={closeErr}>
+            <div className='bg-white p-3' style={{borderRadius:'10px'}}>
+                <h1 className='border border-4 border-color5 text-danger rounded-pill text-center mx-auto' style={{width: '60px', height: '60px', lineHeight: '50px'}}>X</h1>
+                <h1 className='fs-4 text-danger text-center'>FAILED</h1>
+                <p>Minimum top up amount is Rp. 10.000</p>
+                </div>
+            </div>}
+        {successTopup && <div className='bg-secondary bg-opacity-10 position-absolute top-0 d-flex justify-content-center align-items-center vh-100 vw-100' onClick={closeSuccess}>
+            <div className='bg-white p-3 text-center' style={{borderRadius:'10px', width: '250px'}}>
+                <h1 className='text-color3 rounded-pill mx-auto' style={{width: '60px', height: '60px', lineHeight: '50px'}}><BsCheckCircle /></h1>
+                <h1 className='fs-4 text-color3'>SUCCESS</h1>
+                <p>Top up success</p>
+            </div>
+        </div>}
         </>
     )
 }
