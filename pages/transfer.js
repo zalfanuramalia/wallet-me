@@ -9,6 +9,9 @@ import { getUsers } from "../redux/actions/users"
 import { getUserRecepient } from "../redux/actions/transfer"
 import { useEffect, useState } from "react"
 import Head from "next/head"
+import styles from "../styles/transfer.module.scss"
+import Footer from "../components/Footer"
+import profile from "../public/images/profil.png"
 
 const Transfers = () => {
     const {users} = useSelector(state=> state)
@@ -42,20 +45,20 @@ const Transfers = () => {
         </Head>
         <NavbarComponent />
         <Container>
-            <Row>
+            <Row className="mb-5">
                 <Col xl={3}>
                     <Card className="mt-5 position-relative shadow-lg border border-top-0 border-start-0 border-end-0 border-5 border-bottom radius-1">
                         <SidePart />
                     </Card>
                 </Col>
                 <Col xl={9}>
-                    <Card className="mt-5 position-relative shadow-lg border border-top-0 border-start-0 border-end-0 border-5 border-bottom radius-1">
+                    <Card className={`${styles.scroll} mt-5 position-relative shadow-lg border border-top-0 border-start-0 border-end-0 border-5 border-bottom radius-1`}>
                         <div className="px-5 mt-3">Search Receiver</div>
                         <div className='d-flex flex-row align-items-center px-5 my-3 w-100 d-inline-block position-relative'>
                             <div className="position-absolute px-2"><BsSearch /></div>                            
                             <input type="text" className='px-5 py-2 bg-color5 radius-1' placeholder= 'Search receiver here' />
                         </div>
-                        <div className="px-5 mb-5">
+                        <div className={`${styles.scroll} px-5`}>
                             {users.userData.length > 0 && auth.userData !== null && users.userData.filter((items)=>items.id !== auth.userData.id).map((items)=>{
                                 return (
                                     <>{
@@ -79,7 +82,7 @@ const Transfers = () => {
                                     <Card key={items.id} onClick={() => goToTransfer(items)} style={{ cursor: 'pointer' }} className="mt-3 position-relative shadow-lg border border-top-0 border-start-0 border-end-0 border-5 border-bottom radius-1">
                                         <Row className="px-5 mt-3">
                                             <Col md={2}>
-                                                <Image src={items.picture === null || items.picture=='undefined' ? "/images/profil.png" : items.picture}  width={60} height={60} alt="profile"  />
+                                                <Image src={items.picture !== null ? items.picture : profile}  width={60} height={60} alt="profile"  />
                                             </Col>
                                             <Col md={10}>
                                                 <div className="d-flex flex-column justify-content-center">
@@ -97,6 +100,7 @@ const Transfers = () => {
                 </Col>
             </Row>
         </Container>
+        <Footer />
         </>
     )
 }

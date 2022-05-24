@@ -17,6 +17,23 @@ const transfer = (state=dataTransfer,action)=>{
             state.dataTransfer = action.payload
             return {...state}
         }
+        case 'TRANSACTION_PENDING' : {
+            state.isLoading = true;
+            return {...state};
+        }
+        case 'TRANSACTION_FULFILLED' : {
+            const{data} = action.payload;
+            state.isLoading = false;
+            state.message = data.message;
+            state.isError = false;
+            return {...state};
+        }
+        case 'TRANSACTION_REJECTED':{
+            const {data} = action.payload.response;
+            state.isLoading = false;
+            state.isError = true;
+            state.errMessage = data.message;
+        }
         default : {
             return {...state}
         }

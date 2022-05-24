@@ -1,5 +1,5 @@
-// import qs from 'qs'
-// import http from '../../helpers/http'
+import qs from 'qs'
+import http from '../../helpers/http'
 
 export const getUserRecepient = (user,phone) => {
     var data = null
@@ -20,4 +20,12 @@ export const dataTransfer = (amount,recipient,notes) => {
          type: 'DATA_TRANSFER',
          payload : data
      }
- }
+}
+
+export const postProcessTransfer = (data, token) => {
+    return {
+       type: 'TRANSACTION',
+       payload: http(token).post('/transactions/transfer', qs.stringify(data))
+    };
+};
+
