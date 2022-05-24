@@ -35,7 +35,7 @@ const Confirmation= () =>{
       dispatch(postProcessTransfer(data, auth.token));
       router.push('/transfer/status');
    };
-
+  
     return (     
         <>  
             <Head>
@@ -51,7 +51,7 @@ const Confirmation= () =>{
                             <SidePart />
                         </Card>
                     </Col>
-                    <Col xl={9}>                    
+                    <Col xl={9}>
                         <Card className={`${confirmations.information} px-4 mt-5 py-3 position-relative shadow-lg border border-top-0 border-start-0 border-end-0 border-5 border-bottom`}>
                             <div className="fs-5 mb-3 mx-3 py-2 fw-bold">Transfer to</div>
                             <Card className={`${confirmations.info} py-2 my-1 mx-3 position-relative shadow-lg border-top-0 border-start-0 border-end-0 border-5 border-bottom`}>
