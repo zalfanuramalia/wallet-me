@@ -28,3 +28,4 @@ export const postProcessTransfer = (data, token) => {
        payload: http(token).post('/transactions/transfer', qs.stringify(data))
     };
 };
+
