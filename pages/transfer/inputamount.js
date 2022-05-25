@@ -64,7 +64,6 @@ const InputAmount = () => {
     }
 
     const goTransfer = (event) =>{
-        console.log('masuk!!');
         let value = event.target.value
         if(event.target.name=="amount"){
             setAmount(value)
