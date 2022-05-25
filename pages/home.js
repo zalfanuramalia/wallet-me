@@ -1,8 +1,8 @@
-import { Container, Row, Col, Card, Button } from "react-bootstrap"
+import { Container, Row, Col, Card } from "react-bootstrap"
 import NavbarComponent from "../components/NavbarHome"
 import SidePart from "../components/SidePart"
 import Image from "next/image"
-import BarCharts from "../components/BarCharts"
+import BarCharts from "../components/Barcharts"
 import Head from "next/head"
 import Link from "next/link"
 import styles from '../styles/home.module.scss'
