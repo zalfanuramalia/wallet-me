@@ -12,17 +12,17 @@ const Login = () => {
     const dispatch = useDispatch()
     const [error, setError] = useState({})
     const router = useRouter()
-    const [validated, setValidated] = useState(false);
 
     const validation = (data)=>{
-        const error = {}
+        const newErrors = {}
         if(!data.email || data.email===''){
-            error.email = 'Email must be filled'
+            newErrors.email = 'Email must be filled'
         }
+
         if(!data.password || data.password===''){
-            error.password = 'Password must be filled'
+            newErrors.password = 'Password must be filled'
         }
-        return error;
+        return newErrors;
     }
 
     const handleLogin = (event)=>{
@@ -35,7 +35,6 @@ const Login = () => {
 
         if(Object.keys(validate).length > 0){
             setError(validate)
-            setValidated(false)
         }
         else{
             dispatch(loginProcess(email,password))           
@@ -48,12 +47,12 @@ const Login = () => {
     return (
         <>
         <Head>
-        <title>Login</title>
+        <title>Home</title>
         <meta name="description" content="Next Wallet your future wallet" />
         <link rel="icon" href="/favicon.ico" />
         </Head>
         <div className='container-fluid'>
-            <Form validated={validated} onSubmit={handleLogin}>       
+            <Form onSubmit={handleLogin}>       
                 <Row >
                     <Col xl={6} className='bg-color1 log-1'>
                         <div className='bg-title'>
@@ -84,10 +83,10 @@ const Login = () => {
                             <Col xl={12}>
                             <div className='d-flex flex-row align-items-center px-5 my-3 w-100 d-inline-block position-relative' >
                                 <i className="bi bi-envelope position-absolute"></i>
-                                <input type="text" name='email' className='px-4 py-2 text-color3 input-underline' placeholder= 'Enter your e-mail'/>                                
+                                <input type="text" name='email' className='px-4 py-2 text-color3 input-underline' placeholder= 'Enter your e-mail'/>
+                                
                             </div>
                             <span className="underline"></span>
-                            {error!==null && error.email ? <Form.Control.Feedback type="invalid"></Form.Control.Feedback> : '' }
                             </Col>
                             <Col xl={12}>
                             <div className='d-flex flex-row align-items-center px-5 my-3 w-100 d-inline-block position-relative' >
@@ -95,7 +94,6 @@ const Login = () => {
                                 <input type="password" name='password' className='px-4 py-2 text-color3 input-underline' placeholder= 'Enter your password'/>
                             </div>
                             <span className="underline"></span>
-                            {error!==null && error.password ? <Form.Control.Feedback type="invalid"></Form.Control.Feedback> : '' }
                             </Col>
                             <Col xl={12} className='mt-2 px-5 g-0 text-end'>
                                 <div className='mx-4 my-4'>

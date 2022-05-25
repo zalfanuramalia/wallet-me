@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Router, useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import {BsGrid} from 'react-icons/bs'
 import {HiOutlineArrowUp, HiOutlinePlus} from 'react-icons/hi'
@@ -7,21 +7,15 @@ import {FiUser} from 'react-icons/fi'
 import {MdLogout} from "react-icons/md"
 import Modals from '../components/ModalsTopup'
 import React from 'react'
-import sidepart from "../styles/SidePart.module.scss";
-import { useDispatch, useSelector } from 'react-redux'
+import confirmations from "../styles/confirmation.module.scss";
 
 const SidePart = ()=> {
     const [modalShow, setModalShow] = React.useState(false);
     const route = useRouter()
     const [active, setActive] = useState('/')
-    const {auth} = useSelector (state => state)
-    const dispatch = useDispatch()
-    const router = useRouter()
     useEffect(()=>{
         setActive(route.pathname)
     }, [route.pathname])
-
-
     const variation = [
         {link: '/home', name: 'Dashboard', icon: BsGrid},
         {link: '/transfer', name: 'Transfer', icon: HiOutlineArrowUp},
@@ -34,7 +28,6 @@ const SidePart = ()=> {
         {`
             .variation {
                 list-style-type: none;
-                border-radius: 20px
             }
             .variation li {
                 margin: 10px 0;
@@ -80,8 +73,8 @@ const SidePart = ()=> {
                     <div className="mt-5 py-3">
                         <Link href="/" >
                             <a className=" d-flex flex-row mt-5 text-decoration-none logout">
-                                <div className="px-3" ><MdLogout /></div>                                                                                                 
-                                <div className='text-decoration-none' onClick={()=>dispatch({type: 'AUTH_LOGOUT'})}>Logout</div>
+                                <div className="px-3" ><MdLogout /></div>                                        
+                                <div>Logout</div>
                             </a>                                        
                         </Link>                                    
                     </div>                                

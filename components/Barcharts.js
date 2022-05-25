@@ -64,22 +64,22 @@ const options = {
   };
   return (
     <Container>
-        <Row className='text-center mt-3'>
-            <Col xs={6} className='mt-3'>
+        <Row>
+            <Col xs={6}>
                 <div>
                     <FaArrowDown color="#1EC15F" />
                 </div>
                 <div>Income</div>
                 <div>Rp. {Number(income).toLocaleString('id-ID')}</div>
             </Col>
-            <Col xs={6} className='mt-3'>
+            <Col xs={6}>
                 <div>
                     <FaArrowUp color="#FF5B37" />
                 </div>
                 <div>Expense</div>
                 <div>Rp. {Number(expense).toLocaleString('id-ID')}</div>
             </Col>
-            <Col xs={12} className='mt-5'>
+            <Col xs={12}>
                 <Bar options={options} data={data}  />
             </Col>
         </Row>

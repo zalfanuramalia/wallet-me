@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import Link from 'next/link'
-import Head from 'next/head'
 import { getDataRegister } from "../redux/actions/register";
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -50,12 +49,6 @@ const Register = () => {
     }
 
     return (
-        <>
-        <Head>
-        <title>Register</title>
-        <meta name="description" content="Next Wallet your future wallet" />
-        <link rel="icon" href="/favicon.ico" />
-        </Head>        
         <div className='container-fluid'>
             <Form validated={validated} onSubmit={handleRegister}>    
                 <Row >
@@ -115,7 +108,9 @@ const Register = () => {
                                 <input type="password" name='password' className='px-4 py-2 text-color3 input-underline' placeholder= 'Create your password' required/>
                             </div>
                             <span className="underline"></span>
-                            {error!==null && error.password ? <Form.Control.Feedback type="invalid"></Form.Control.Feedback> : '' }
+                            {error!==null && error.password ? <Form.Control.Feedback type="invalid">
+            Please provide a valid city.
+          </Form.Control.Feedback> : '' }
                             </Col>
                             <Col xl={12} className='mt-2 px-5 g-0 text-end'>
                                 <div className='mx-4 my-2'>
@@ -127,7 +122,7 @@ const Register = () => {
                                 </div>
                             </Col>
                             <Col xl={12} className='text-center '>
-                                <button type='submit' className='bg-color3 btn-login mt-3'>Signup</button>
+                                <button className='bg-color3 btn-login mt-3'>Signup</button>
                             </Col>
                             <Col>
                                 <div className='mt-4 px-5 mb-4 text-center '>Already have an account? Let’s <Link href="/login" ><a className='text-decoration-none text-color3'>Login</a></Link></div>
@@ -137,7 +132,6 @@ const Register = () => {
                 </Row>
             </Form>  
         </div>
-        </>
     )
 }
 

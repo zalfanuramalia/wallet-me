@@ -11,13 +11,10 @@ export const forgotPassProcess = (email) => {
     }
 }
 
-export const resetPassProcess = (datas) => {
-    const params = new URLSearchParams()
-    params.append('otp', datas.otp)
-    params.append('newPassword', datas.newPassword)
-    params.append('confirmPassword', datas.confirmPassword)
-    return({
-    type: 'RESET_PASSWORD',
-    payload: http().post('/auth/forgot-password', params)
-  })
+export const resetPassProcess = (password, confirmPass) => {
+    const data = {password, confirmPass}
+    return {
+        type: 'RESET_PASSWORD',
+        payload: http().post('/auth/forgot-password', qs.stringify(data))
+    }
 }
