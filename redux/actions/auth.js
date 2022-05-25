@@ -9,9 +9,17 @@ export const loginProcess = (email, password) => {
     }
 }
 
-export const getDataUsers = (token) => {
+export const getDataProfile = (token) => {
     return {
-        type: 'GET_USER',
-        payload: http(token).get('/users')
+        type: 'GET_PROFILE',
+        payload: http(token).get('/profile')
     }
 }
+
+export const getBalance = (token) => {
+    return {
+        type: 'GET_BALANCE',
+        payload: http(token).get('/profile/balance')
+    }
+}
+
