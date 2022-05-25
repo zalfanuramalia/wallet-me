@@ -1,40 +1,30 @@
 import Link from 'next/link'
-import { Router, useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import {BsGrid} from 'react-icons/bs'
 import {HiOutlineArrowUp, HiOutlinePlus} from 'react-icons/hi'
 import {FiUser} from 'react-icons/fi'
 import {MdLogout} from "react-icons/md"
-import Modals from '../components/ModalsTopup'
-import React from 'react'
-import sidepart from "../styles/SidePart.module.scss";
-import { useDispatch, useSelector } from 'react-redux'
 
 const SidePart = ()=> {
-    const [modalShow, setModalShow] = React.useState(false);
     const route = useRouter()
     const [active, setActive] = useState('/')
-    const {auth} = useSelector (state => state)
-    const dispatch = useDispatch()
-    const router = useRouter()
     useEffect(()=>{
         setActive(route.pathname)
     }, [route.pathname])
-
-
     const variation = [
         {link: '/home', name: 'Dashboard', icon: BsGrid},
         {link: '/transfer', name: 'Transfer', icon: HiOutlineArrowUp},
         {link: '/topup', name: 'Topup', icon: HiOutlinePlus},
-        {link: '/profile', name: 'Profile', icon: FiUser},
+        {link: '/profile/change-password', name: 'Profile', icon: FiUser}
     ]
     return(
         <>
         <style jsx>
         {`
             .variation {
+                background-color: white;
                 list-style-type: none;
-                border-radius: 20px
             }
             .variation li {
                 margin: 10px 0;
@@ -59,15 +49,10 @@ const SidePart = ()=> {
         {variation.map(item => {
             const Icon = item.icon
             return (
-                <li key={item.name} >
+                <li key={item.name}>
                     <Link href={item.link}>
                         <a className={`d-flex flex-row align-items-center mt-4 ${active===item.link?'active':'' }`}>
-                            {item.name === "Topup" &&
-                           <div onClick={()=>setModalShow(true)}><span className='px-3'><Icon  /></span> {item.name}</div>}
-                           <Modals show={modalShow} onHide={() => setModalShow(false)} />
-                           {item.name !== "Topup" &&
-                           <div><span className='px-3'><Icon  /></span> {item.name}</div>
-                           }
+                           <div><span className='px-3'><Icon  /></span> {item.name}</div> 
                         </a>
                     </Link>
                 </li>
@@ -80,8 +65,8 @@ const SidePart = ()=> {
                     <div className="mt-5 py-3">
                         <Link href="/" >
                             <a className=" d-flex flex-row mt-5 text-decoration-none logout">
-                                <div className="px-3" ><MdLogout /></div>                                                                                                 
-                                <div className='text-decoration-none' onClick={()=>dispatch({type: 'AUTH_LOGOUT'})}>Logout</div>
+                                <div className="px-3" ><MdLogout /></div>                                        
+                                <div>Logout</div>
                             </a>                                        
                         </Link>                                    
                     </div>                                
