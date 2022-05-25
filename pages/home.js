@@ -81,7 +81,7 @@ const Dashboard = ({getBalance}) => {
                     <Row>
                         <Col xs={7}>
                           <Card className={`${styles.bar} position-relative shadow-lg border border-top-0 border-start-0 border-end-0 border-5 border-bottom mt-3`}>
-                            <BarCharts data={[10,50,200,300]} labels={['Sat','Sun','Mon','Tue','Fri','Sat']} income={0} expense={0} />
+                            <BarCharts labels={['Sat','Sun','Mon','Tue','Fri','Sat']} data={[10,50,200,300]} income={0} expense={0} />
                           </Card>
                         </Col>
                         <Col xs={5}>
