@@ -13,7 +13,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import React, { useEffect, useRef, useState } from 'react'
 import { getDataProfile } from "../redux/actions/auth";
 import photo from '../public/images/empty-input-image.png'
-import Head from 'next/head'
 
 const Profile = () => {
     const auth = useSelector(state => state.auth)
@@ -138,13 +137,7 @@ const Profile = () => {
                         {auth.token !== null && <div>
                         <div className="text-center mt-3 text-name">{auth.userData.fullName}</div>
                         <div className="text-center mt-1 text-phone text-color3">+62 813-9387-7946</div></div>}
-                        <div className="mt-4 d-flex flex-row justify-content-center">
-                            <Button className='bg-color1 text-color4 btn-login mt-1 d-flex flex-row justify-content-between align-items-center'>
-                                <div>Personal Information</div>
-                                <div><BsArrowRight /></div>
-                        <div className="text-center mt-3 text-name">Robert Chandler</div>
-                        <div className="text-center mt-1 mb-3 text-phone text-color3">+62 813-9387-7946</div>
-                        <div className="text-center">
+                        <div className="text-center mt-3">
                             <Button className={`mt-3 text-center bg-color1 ${profiles.btnlogin}`}>
                                 <Link href="/profile/personal-information">
                                     <a className='bg-color1 text-color4 text-decoration-none d-flex flex-row justify-content-between align-items-center'>
