@@ -1,9 +1,9 @@
 import React from 'react'
 import Head from 'next/head'
 import { Container, Form, Row, Col, Card, Button } from 'react-bootstrap'
-import NavbarComponent from '../components/NavbarHome'
-import Footer from '../components/Footer'
-import confirmation from '../styles/confirmation.module.scss'
+import NavbarComponent from '../../components/NavbarHome'
+import Footer from '../../components/Footer'
+import confirmation from '../../styles/confirmation.module.scss'
 import Image from 'next/image'
 
 const status = () => {

@@ -112,7 +112,7 @@ const InputAmount = () => {
                                     </Col>
                                 </Row>
                             </Card>
-                            <div>Type the amount you want to transfer and then press continue to the next steps.</div>
+                            <div className="mt-3">Type the amount you want to transfer and then press continue to the next steps.</div>
                             <Form onSubmit={transferHandler}>
                             <div className="d-flex justify-content-center align-items-center mt-5">
                                 <input name="amount" type="number" placeholder="0.00" onChange={goTransfer} />
