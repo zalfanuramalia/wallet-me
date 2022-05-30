@@ -41,7 +41,7 @@ const Login = () => {
         else{
             dispatch(loginProcess(email,password))           
             if(!auth.isError){
-                router.push('/home')
+                router.push('/')
             }
         }
          

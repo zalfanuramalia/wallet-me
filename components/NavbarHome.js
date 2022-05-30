@@ -33,7 +33,7 @@ const NavbarComponent = ()=>{
         <Navbar className={variables.navbarLight} variant="dark">
         <Container>
           <Navbar.Brand className={variables.navbarBrand} href="/">
-            <Link href='/home'>
+            <Link href='/'>
               <a className="text-decoration-none text-color3">Wallet-me</a>
             </Link> 
           </Navbar.Brand>

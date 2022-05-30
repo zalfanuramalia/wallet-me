@@ -13,7 +13,7 @@ const SidePart = ()=> {
         setActive(route.pathname)
     }, [route.pathname])
     const variation = [
-        {link: '/home', name: 'Dashboard', icon: BsGrid},
+        {link: '/', name: 'Dashboard', icon: BsGrid},
         {link: '/transfer', name: 'Transfer', icon: HiOutlineArrowUp},
         {link: '/topup', name: 'Topup', icon: HiOutlinePlus},
         {link: '/profile/change-password', name: 'Profile', icon: FiUser}
@@ -63,7 +63,7 @@ const SidePart = ()=> {
             <div className="px-4  mt-5">
                 <div className="px-4 py-5 mt-5">
                     <div className="mt-5 py-3">
-                        <Link href="/" >
+                        <Link href="/login" >
                             <a className=" d-flex flex-row mt-5 text-decoration-none logout">
                                 <div className="px-3" ><MdLogout /></div>                                        
                                 <div>Logout</div>

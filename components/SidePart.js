@@ -23,7 +23,7 @@ const SidePart = ()=> {
 
 
     const variation = [
-        {link: '/home', name: 'Dashboard', icon: BsGrid},
+        {link: '/', name: 'Dashboard', icon: BsGrid},
         {link: '/transfer', name: 'Transfer', icon: HiOutlineArrowUp},
         {link: '/topup', name: 'Topup', icon: HiOutlinePlus},
         {link: '/profile', name: 'Profile', icon: FiUser},
