@@ -1,9 +1,10 @@
-import { Container, Row, Col, Card, Button, Input } from "react-bootstrap"
+import { Container, Row, Col, Card, Button} from "react-bootstrap"
 import NavbarComponent from "../../components/NavbarHome"
-import SidePart from "../../components/SidePart"
+import ProfileBar from "../../components/ProfileBar"
 import Footer from "../../components/Footer"
 import Head from 'next/head'
 import { FaPencilAlt } from "react-icons/fa"
+import style from "../../styles/add-phone-number.module.scss"
 
 const AddPhoneNumber = () => {    
     return (
@@ -39,7 +40,7 @@ const AddPhoneNumber = () => {
             <Row>
                 <Col xl={3}>
                     <Card className="radius mt-5 position-relative shadow-lg border border-top-0 border-start-0 border-end-0 border-5 border-bottom ">
-                        <SidePart />
+                        <ProfileBar />
                     </Card>
                 </Col>
                 <Col xl={9}>
@@ -48,8 +49,11 @@ const AddPhoneNumber = () => {
                         <div>Add at least one phone number for the transfer ID so you can start transfering your money to another user.</div>
                         <div className='d-flex mt-5 mb-5 me-3'>
                             <FaPencilAlt/>
-                            <Input type="text" name="notes"  placeholder="Add some note"/>
+                            <input type="text" name="notes"  placeholder="Add some note"/>
                         </div>
+                        <div className="mt-5">
+                        <Button type="submit" className={`${style.button} btn-primary mb-5`}>Change Phone Number</Button>
+                     </div>
                     </Card>
                 </Col>
             </Row>

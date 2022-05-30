@@ -1,0 +1,9 @@
+$secondary: #FFFFFF !default;
+
+.button {
+    height: 57px;
+    width: 100%;
+    border-radius: 12px;
+    font-weight: 700;
+    color: $secondary;
+}
