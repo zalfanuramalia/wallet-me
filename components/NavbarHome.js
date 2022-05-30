@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { getDataProfile } from "../redux/actions/auth";
 import Link from "next/link";
 import styles from "../styles/home.module.scss"
+import photo from '../public/images/empty-input-image.png'
 
 const NavbarComponent = ()=>{  
     const auth = useSelector(state => state.auth)
@@ -39,7 +40,7 @@ const NavbarComponent = ()=>{
           <Navbar.Toggle />
           {auth.token !== null && 
           <Navbar.Collapse className="justify-content-end">
-            <Image src='/images/profil.png' width={70} height={50} alt='profile' className="me-3 rounded-full"/>
+            <Image src={auth.userData?.picture || photo} width={70} height={50} alt='profile' className="me-3 rounded-full"/>
             <Navbar.Text>
               <div className={variables.textName}>{auth.userData.fullName}</div>
               <div className={variables.textPhone}>+62 8139 3877 7946</div>
