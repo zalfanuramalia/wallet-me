@@ -6,7 +6,7 @@ import Link from 'next/link'
 import Head from 'next/head'
 import { getDataRegister } from "../redux/actions/register";
 import { useDispatch, useSelector } from 'react-redux'
-import phone from "../public/images/Group 57.png"
+import phone from "../public/images/Group-57.png"
 
 const Register = () => {
     const register = useSelector(state => state.register)

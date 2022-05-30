@@ -3,6 +3,7 @@ import {FaCheckCircle} from 'react-icons/fa'
 import { useRouter } from "next/router";
 import Image from 'next/image';
 import {Col, Row, Form} from 'react-bootstrap'
+import phone from '../public/images/Group-57.png'
 
 const AccountCreated = () =>{
 
@@ -19,7 +20,7 @@ const AccountCreated = () =>{
                         <div className='bg-title'>
                             <div className='text-center px-5 mx-5 mt-4 title'>Wallet-me</div>
                             <div className='d-flex flex-row justify-content-center'>
-                                <Image src='/images/Group 57.png' className='position absolute ' width={442} height={505}  alt='phone'/>                                
+                                <Image src={phone} className='position absolute ' width={442} height={505}  alt='phone'/>                                
                             </div>                            
                             <h3 className='mx-5 '>App that Covering Banking Needs.</h3>
                             <div className='d-flex-flex-row align-items-center'>

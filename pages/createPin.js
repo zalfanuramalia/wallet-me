@@ -6,7 +6,7 @@ import { useState } from 'react';
 import createpin from '../styles/createpin.module.scss'
 import { connect, useSelector } from 'react-redux'
 import { registerProcess } from "../redux/actions/register";
-import phone from "../public/images/Group 57.png"
+import phone from "../public/images/Group-57.png"
 
 const CreatePin = ({registerProcess}) => {
     const register = useSelector(state => state.register)
