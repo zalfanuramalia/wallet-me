@@ -1,13 +1,13 @@
 import qs from 'qs'
 import http from '../../helpers/http'
 
-const {NEXT_PUBLIC_CALL_URL} = process.env
+const {NEXT_PUBLIC_BACKEND_URL} = process.env
 
 export const forgotPassProcess = (email) => {
     const data = {email:email}
     return {
         type: 'FORGOT_PASSWORD',
-        payload: http().post(`/auth/forgot-password?callback_url=${NEXT_PUBLIC_CALL_URL}`, qs.stringify(data))
+        payload: http().post(`/auth/forgot-password?callback_url=${NEXT_PUBLIC_BACKEND_URL}`, qs.stringify(data))
     }
 }
 
