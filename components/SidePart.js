@@ -78,7 +78,7 @@ const SidePart = ()=> {
             <div className="px-4  mt-5">
                 <div className="px-4 py-5 mt-5">
                     <div className="mt-5 py-3">
-                        <Link href="/" >
+                        <Link href="/login" >
                             <a className=" d-flex flex-row mt-5 text-decoration-none logout">
                                 <div className="px-3" ><MdLogout /></div>                                                                                                 
                                 <div className='text-decoration-none' onClick={()=>dispatch({type: 'AUTH_LOGOUT'})}>Logout</div>
