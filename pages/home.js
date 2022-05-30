@@ -16,12 +16,11 @@ import logo from "../public/images/logo-history.png"
 
 const Dashboard = ({getBalance}) => {
   const {auth} = useSelector(state=>state)
-  const dispatch = useDispatch()
 
   useEffect(()=>{ 
-      dispatch(getBalance(auth.token))
+      getBalance(auth.token)
       // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[dispatch, auth.token])
+  },[auth.token])
   return (
     <>
         <style jsx>
