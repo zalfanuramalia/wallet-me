@@ -16,7 +16,8 @@ const Dashboard = ({getBalance}) => {
 
   useEffect(()=>{ 
       dispatch(getBalance(auth.token))
-  },[])
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[dispatch, auth.token])
   return (
     <>
         <style jsx>
