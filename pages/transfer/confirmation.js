@@ -10,7 +10,6 @@ import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
 import ModalsTransfer from "../../components/ModalsTransfer";
 import OtpInput from "react-otp-input"
-import InputPin from 'react-pin-input'
 import { useState } from "react";
 import { postProcessTransfer } from "../../redux/actions/transfer";
 import { useRouter } from "next/router";
@@ -20,7 +19,6 @@ const Confirmation= () =>{
     const handleShow = () => setShow(true);
     const handleClose = () => setShow(false);
     const [show, setShow] = useState(false);
-    const [pin,setPin] = useState(0);
     const dispatch = useDispatch();
     const router = useRouter();
     const [otp, setOtp] = useState('')
@@ -123,19 +121,6 @@ const Confirmation= () =>{
                                     inputStyle={confirmations.otpInput}
                                     
                                 />
-                                {/* <InputPin
-                                    length={6} 
-                                    initialValue=""
-                                    secret
-                                    onChange={(value, index) => {}} 
-                                    type="numeric" 
-                                    inputMode="number"
-                                    onComplete={(value, index) => {
-                                        setPin(value);
-                                    }}
-                                    autoSelect={true}
-                                    regexCriteria={/^[ A-Za-z0-9_@./#&+-]*$/}
-                                /> */}
                                 </ModalsTransfer>
                             </div>
                         </Card>
