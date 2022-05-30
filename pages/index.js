@@ -6,7 +6,7 @@ import BarCharts from "../components/Barcharts"
 import Head from "next/head"
 import Link from "next/link"
 import styles from '../styles/home.module.scss'
-import { connect, useDispatch, useSelector } from "react-redux"
+import { connect, useSelector } from "react-redux"
 import { useEffect } from "react"
 import { getBalance } from "../redux/actions/auth"
 import profile1 from "../public/images/prof-1.png"

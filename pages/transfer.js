@@ -20,8 +20,8 @@ const Transfers = () => {
     const dispatch = useDispatch()
 
     useEffect(()=>{
-        dispatch(getUsers(auth.token))
-    },[])
+        dispatch(getUsers(auth.token))        
+    },[dispatch, auth.token])
 
     const goToTransfer = (items, phones=null) => {
         dispatch(getUserRecepient(items, phones))
