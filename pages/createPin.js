@@ -6,6 +6,7 @@ import { useState } from 'react';
 import createpin from '../styles/createpin.module.scss'
 import { connect, useSelector } from 'react-redux'
 import { registerProcess } from "../redux/actions/register";
+import phone from "../public/images/Group 57.png"
 
 const CreatePin = ({registerProcess}) => {
     const register = useSelector(state => state.register)
@@ -27,7 +28,7 @@ const CreatePin = ({registerProcess}) => {
                         <div className='bg-title'>
                             <div className='text-center px-5 mx-5 mt-4 title'>Wallet-me</div>
                             <div className='d-flex flex-row justify-content-center'>
-                                <Image src='/images/Group 57.png' className='position absolute ' width={442} height={505}  alt='phone'/>                                
+                                <Image src={phone} className='position absolute ' width={442} height={505}  alt='phone'/>                                
                             </div>                            
                             <h3 className='mx-5 '>App that Covering Banking Needs.</h3>
                             <div className='d-flex-flex-row align-items-center'>
