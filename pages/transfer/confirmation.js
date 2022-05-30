@@ -24,8 +24,8 @@ const Confirmation= () =>{
     const [otp, setOtp] = useState('')
 
     useEffect(()=>{
-        dispatch(dataTransfer(transfer?.dataTransfer?.amount, transfer?.dataReceiver?.user.id, transfer.dataTransfer.notes))
-    }, [dispatch, transfer?.dataTransfer?.amount, transfer?.dataReceiver?.user.id, transfer.dataTransfer.notes])
+        dispatch(dataTransfer(transfer?.dataTransfer?.amount, transfer?.dataReceiver?.user.id, transfer.dataTransfer?.notes))
+    }, [dispatch, transfer?.dataTransfer?.amount, transfer?.dataReceiver?.user.id, transfer.dataTransfer?.notes])
    
    const handleConfirmationTransaction = (event)=>{
       event.preventDefault();
@@ -33,7 +33,7 @@ const Confirmation= () =>{
          amount : transfer?.dataTransfer?.amount,
          recipient : transfer?.dataReceiver?.user.id,
          pin : otp,
-         notes : transfer?.dataTransfer.notes
+         notes : transfer?.dataTransfer?.notes
       };
       dispatch(postProcessTransfer(data, auth.token));
       router.push('/transfer/status');
@@ -106,7 +106,7 @@ const Confirmation= () =>{
                                     <Col>
                                         <div className="d-flex flex-column justify-content-center py-2">
                                             <div className="fs-6 py-1">Notes</div>
-                                            <div className="fw-bold fs-5 py-1">{transfer?.dataTransfer!==null && transfer?.dataTransfer.notes}</div>
+                                            <div className="fw-bold fs-5 py-1">{transfer?.dataTransfer!==null && transfer?.dataTransfer?.notes}</div>
                                         </div>
                                     </Col>
                                 </Row>
