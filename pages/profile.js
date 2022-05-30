@@ -21,14 +21,12 @@ const Profile = () => {
 
     const hiddenFileInput = useRef(null)
     const [data, setData] = useState({})
-
-    // const { id } = useParams()
     
     const router = useRouter()
 
     useEffect(() => {
         dispatch(getDataProfile(auth.token))
-    }, [])
+    }, [dispatch, auth.token])
 
     const fileInputHandler = (e) => {
         const reader = new FileReader();
