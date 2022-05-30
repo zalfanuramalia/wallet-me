@@ -24,8 +24,8 @@ const Confirmation= () =>{
     const [otp, setOtp] = useState('')
 
     useEffect(()=>{
-        dispatch(dataTransfer(transfer.dataTransfer.amount, transfer.dataReceiver.user.id, transfer.dataTransfer.notes))
-    }, [dispatch, transfer.dataTransfer.amount, transfer.dataReceiver.user.id, transfer.dataTransfer.notes])
+        dispatch(dataTransfer(transfer?.dataTransfer?.amount, transfer.dataReceiver.user.id, transfer.dataTransfer.notes))
+    }, [dispatch, transfer?.dataTransfer?.amount, transfer.dataReceiver.user.id, transfer.dataTransfer.notes])
    
    const handleConfirmationTransaction = (event)=>{
       event.preventDefault();
@@ -76,7 +76,7 @@ const Confirmation= () =>{
                                     <Col>
                                         <div className="d-flex flex-column justify-content-center py-2">
                                             <div className="fs-6 py-1">Amount</div>
-                                            <div className="fw-bold fs-5 py-1">Rp.{transfer?.dataTransfer!==null && parseFloat(transfer?.dataTransfer?.amount).toLocaleString('id-ID')}</div>
+                                            <div className="fw-bold fs-5 py-1">Rp.{transfer?.dataTransfer!==null && parseFloat(transfer.dataTransfer?.amount).toLocaleString('id-ID')}</div>
                                         </div>
                                     </Col>
                                 </Row>
@@ -86,7 +86,7 @@ const Confirmation= () =>{
                                     <Col>
                                         <div className="d-flex flex-column justify-content-center py-2">
                                             <div className="fs-6 py-1">Balance Left</div>
-                                            <div className="fw-bold fs-5 py-1">Rp.{auth?.balance!==null && transfer?.dataTransfer!==null && transfer?.dataTransfer?.amount!==null && (auth?.balance - parseFloat(transfer?.dataTransfer?.amount)).toLocaleString('id-ID')}</div>
+                                            <div className="fw-bold fs-5 py-1">Rp.{auth?.balance!==null && transfer?.dataTransfer!==null && transfer.dataTransfer?.amount!==null && (auth?.balance - parseFloat(transfer?.dataTransfer?.amount)).toLocaleString('id-ID')}</div>
                                         </div>
                                     </Col>
                                 </Row>
