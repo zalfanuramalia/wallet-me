@@ -9,6 +9,7 @@ import Head from "next/head";
 import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
 import ModalsTransfer from "../../components/ModalsTransfer";
+import OtpInput from "react-otp-input"
 import InputPin from 'react-pin-input'
 import { useState } from "react";
 import { postProcessTransfer } from "../../redux/actions/transfer";
@@ -19,16 +20,17 @@ const Confirmation= () =>{
     const handleShow = () => setShow(true);
     const handleClose = () => setShow(false);
     const [show, setShow] = useState(false);
-    const [pin,setPin] = useState();
+    const [pin,setPin] = useState(0);
     const dispatch = useDispatch();
     const router = useRouter();
+    const [otp, setOtp] = useState('')
    
    const handleConfirmationTransaction = (event)=>{
       event.preventDefault();
       const data = {
          amount : transfer.dataTransfer.amount,
          recipient : transfer.dataReceiver.user.id,
-         pin : pin,
+         pin : otp,
          notes : transfer.dataTransfer.notes
       };
       console.log(auth.token);
@@ -112,7 +114,16 @@ const Confirmation= () =>{
                                 <Button onClick={handleShow} className="btn-primary bg-color4">Continue</Button>
                                 <ModalsTransfer show={show} functionShow={handleShow} close={handleClose} save={handleConfirmationTransaction} button="Continue" title="Enter PIN to Transfer">
                                 <p>Enter your 6 digits PIN for confirmation to continue transferring money.</p>
-                                <InputPin
+                                <OtpInput 
+                                    value={otp}
+                                    onChange={setOtp}
+                                    numInputs={6}
+                                    isInputNum={true}
+                                    containerStyle='flex justify-content-between mt-5 mb-5 mx-5'
+                                    inputStyle={confirmations.otpInput}
+                                    
+                                />
+                                {/* <InputPin
                                     length={6} 
                                     initialValue=""
                                     secret
@@ -124,7 +135,7 @@ const Confirmation= () =>{
                                     }}
                                     autoSelect={true}
                                     regexCriteria={/^[ A-Za-z0-9_@./#&+-]*$/}
-                                />
+                                /> */}
                                 </ModalsTransfer>
                             </div>
                         </Card>

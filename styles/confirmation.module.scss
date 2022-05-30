@@ -18,3 +18,10 @@ $font-family : 'Nunito Sans';
     align-items: center;
     font-family: $font-family;
 }
+
+.otpInput {
+    width: 2em !important;
+    height: 2em;
+    font-family: $font-family;
+    border-radius: 10px;
+}
