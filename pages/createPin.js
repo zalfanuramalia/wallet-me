@@ -9,15 +9,12 @@ import { registerProcess } from "../redux/actions/register";
 
 const CreatePin = ({registerProcess}) => {
     const register = useSelector(state => state.register)
-    const [pin,setPin] = useState(0)
     const [error,setError] = useState(false)
     const router = useRouter()
     
     const handlePin = (event)=>{
         event.preventDefault()
-        console.log(register.data)
-        console.log("pin"+pin)
-        registerProcess(register.data,pin)
+        registerProcess(register.data,otp)
         router.push('/account-created')
     }
     const [otp, setOtp] = useState('')
