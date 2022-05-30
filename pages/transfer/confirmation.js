@@ -10,8 +10,8 @@ import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
 import ModalsTransfer from "../../components/ModalsTransfer";
 import OtpInput from "react-otp-input"
-import { useState } from "react";
-import { postProcessTransfer } from "../../redux/actions/transfer";
+import { useEffect, useState } from "react";
+import { dataTransfer, postProcessTransfer } from "../../redux/actions/transfer";
 import { useRouter } from "next/router";
 
 const Confirmation= () =>{
@@ -22,6 +22,10 @@ const Confirmation= () =>{
     const dispatch = useDispatch();
     const router = useRouter();
     const [otp, setOtp] = useState('')
+
+    useEffect(()=>{
+        dispatch(dataTransfer(transfer.dataTransfer.amount, transfer.dataReceiver.user.id, transfer.dataTransfer.notes))
+    }, [dispatch, transfer.dataTransfer.amount, transfer.dataReceiver.user.id, transfer.dataTransfer.notes])
    
    const handleConfirmationTransaction = (event)=>{
       event.preventDefault();
@@ -31,7 +35,6 @@ const Confirmation= () =>{
          pin : otp,
          notes : transfer.dataTransfer.notes
       };
-      console.log(auth.token);
       dispatch(postProcessTransfer(data, auth.token));
       router.push('/transfer/status');
    };
