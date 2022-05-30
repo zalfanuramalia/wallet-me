@@ -6,15 +6,16 @@ import BarCharts from "../components/Barcharts"
 import Head from "next/head"
 import Link from "next/link"
 import styles from '../styles/home.module.scss'
-import { connect, useSelector } from "react-redux"
+import { connect, useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 import { getBalance } from "../redux/actions/auth"
 
 const Dashboard = ({getBalance}) => {
   const {auth} = useSelector(state=>state)
+  const dispatch = useDispatch()
 
   useEffect(()=>{ 
-      getBalance(auth.token)
+      dispatch(getBalance(auth.token))
   },[])
   return (
     <>
