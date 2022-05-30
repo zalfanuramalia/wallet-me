@@ -24,10 +24,6 @@ const Profile = () => {
     
     const router = useRouter()
 
-    useEffect(() => {
-        dispatch(getDataProfile(auth.token))
-    }, [dispatch, auth.token])
-
     const fileInputHandler = (e) => {
         const reader = new FileReader();
         const picture = e.target.files[0];
@@ -64,7 +60,7 @@ const Profile = () => {
     // }
 
     useEffect(()=>{
-      const token = window.localStorage.getItem('token')
+      const token = auth.token
       if(token){
         dispatch({
           type: 'AUTH_LOGIN_FULFILLED',
