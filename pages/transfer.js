@@ -61,7 +61,7 @@ const Transfers = () => {
                         <div className={`${styles.scroll} px-5`}>
                             {users.userData.length > 0 && auth.userData !== null && users.userData.filter((items)=>items.id !== auth.userData.id).map((items)=>{
                                 return (
-                                    <>{
+                                    <div key={items.id}>{
                                     items.phone.length > 0 ?
                                     items.phone.map((phones)=>{
                                         return (<Card key={phones.id} onClick={() => goToTransfer(items, phones)} style={{ cursor: 'pointer' }} className="mt-3 position-relative shadow-lg border border-top-0 border-start-0 border-end-0 border-5 border-bottom radius-1">
@@ -92,7 +92,7 @@ const Transfers = () => {
                                             </Col>
                                         </Row>
                                     </Card>
-                                }</>
+                                }</div>
                                 )
                             })}
                         </div>

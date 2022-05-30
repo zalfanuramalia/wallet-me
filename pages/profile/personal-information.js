@@ -1,14 +1,20 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect } from 'react'
 import ProfileBar from '../../components/ProfileBar'
 import style from '../../styles/PersonalInformation.module.scss'
 import { Row, Col, Card, Container } from 'react-bootstrap'
 import NavbarComponent from '../../components/NavbarHome'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { getDataProfile } from '../../redux/actions/auth'
 
 const PersonalInformation = () => {
-    const {auth,phone} = useSelector(state=>state);
+    const {auth} = useSelector(state=>state);
+    const dispatch = useDispatch()
+
+    useEffect(()=>{
+        dispatch(getDataProfile(auth.token))
+    }, [dispatch, auth.token])
     return (
         <>
             <Head>
