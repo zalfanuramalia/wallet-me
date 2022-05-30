@@ -30,10 +30,10 @@ const Confirmation= () =>{
    const handleConfirmationTransaction = (event)=>{
       event.preventDefault();
       const data = {
-         amount : transfer.dataTransfer.amount,
-         recipient : transfer.dataReceiver.user.id,
+         amount : transfer?.dataTransfer.amount,
+         recipient : transfer?.dataReceiver.user.id,
          pin : otp,
-         notes : transfer.dataTransfer.notes
+         notes : transfer?.dataTransfer.notes
       };
       dispatch(postProcessTransfer(data, auth.token));
       router.push('/transfer/status');
