@@ -24,14 +24,14 @@ const Confirmation= () =>{
     const [otp, setOtp] = useState('')
 
     useEffect(()=>{
-        dispatch(dataTransfer(transfer?.dataTransfer?.amount, transfer.dataReceiver.user.id, transfer.dataTransfer.notes))
-    }, [dispatch, transfer?.dataTransfer?.amount, transfer.dataReceiver.user.id, transfer.dataTransfer.notes])
+        dispatch(dataTransfer(transfer?.dataTransfer?.amount, transfer?.dataReceiver?.user.id, transfer.dataTransfer.notes))
+    }, [dispatch, transfer?.dataTransfer?.amount, transfer?.dataReceiver?.user.id, transfer.dataTransfer.notes])
    
    const handleConfirmationTransaction = (event)=>{
       event.preventDefault();
       const data = {
          amount : transfer?.dataTransfer?.amount,
-         recipient : transfer?.dataReceiver.user.id,
+         recipient : transfer?.dataReceiver?.user.id,
          pin : otp,
          notes : transfer?.dataTransfer.notes
       };
@@ -64,7 +64,7 @@ const Confirmation= () =>{
                                     </Col>
                                     <Col xl={10} xs={6}>
                                         <div className="d-flex flex-column justify-content-center mt-2">
-                                            <div className="fw-bold">{transfer?.dataReceiver.user.fullName}</div>
+                                            <div className="fw-bold">{transfer?.dataReceiver?.user.fullName}</div>
                                             <div>{transfer?.dataReceiver.phone}</div>
                                         </div>
                                     </Col>
