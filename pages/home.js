@@ -9,6 +9,10 @@ import styles from '../styles/home.module.scss'
 import { connect, useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 import { getBalance } from "../redux/actions/auth"
+import profile1 from "../public/images/prof-1.png"
+import netflix from "../public/images/netflix.png"
+import profile2 from "../public/images/prof-2.png"
+import logo from "../public/images/logo-history.png"
 
 const Dashboard = ({getBalance}) => {
   const {auth} = useSelector(state=>state)
@@ -91,7 +95,7 @@ const Dashboard = ({getBalance}) => {
                                 <div className="mx-3 mt-3">Transaction History</div>
                                 <Row className="mx-3 mt-4">
                                     <Col md={3}>
-                                        <Image src="/images/prof-1.png"  width={60} height={60} alt="profile"  />
+                                        <Image src={profile1}  width={60} height={60} alt="profile"  />
                                     </Col>
                                     <Col md={5}>
                                         <div className="d-flex flex-column justify-content-center">
@@ -107,7 +111,7 @@ const Dashboard = ({getBalance}) => {
                                 </Row>
                                 <Row className="mx-3 mt-3">
                                     <Col md={3}>
-                                        <Image src="/images/netflix.png"  width={60} height={60} alt="profile"  />
+                                        <Image src={netflix}  width={60} height={60} alt="profile"  />
                                     </Col>
                                     <Col md={5}>
                                         <div className="d-flex flex-column justify-content-center">
@@ -123,7 +127,7 @@ const Dashboard = ({getBalance}) => {
                                 </Row>
                                 <Row className="mx-3 mt-3">
                                     <Col md={3}>
-                                        <Image src="/images/prof-2.png"  width={60} height={60} alt="profile"  />
+                                        <Image src={profile2}  width={60} height={60} alt="profile"  />
                                     </Col>
                                     <Col md={5}>
                                         <div className="d-flex flex-column ">
@@ -139,7 +143,7 @@ const Dashboard = ({getBalance}) => {
                                 </Row>
                                 <Row className="mx-3 mt-3 mb-3">
                                     <Col md={3}>
-                                        <Image src="/images/logo-history.png"  width={60} height={60} alt="profile"  />
+                                        <Image src={logo}  width={60} height={60} alt="profile"  />
                                     </Col>
                                     <Col md={5}>
                                         <div className="d-flex flex-column justify-content-center">
