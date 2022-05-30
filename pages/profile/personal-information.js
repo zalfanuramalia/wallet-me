@@ -33,20 +33,20 @@ const PersonalInformation = () => {
                             <div className="edit-indo">
                                 <Card className="info-item rounded shadow p-3 mb-3">
                                     <p className='text-gray mb-1'>First name</p>
-                                    <p className='m-0 fs-5 fw-bold text-black'>{auth.userData!==null && auth.userData.fullName.split(' ')[0]}</p>
+                                    <p className='m-0 fs-5 fw-bold text-black'>{auth?.userData!==null && auth?.userData.fullName.split(' ')[0]}</p>
                                 </Card>
                                 <Card className="info-item rounded shadow p-3 mb-3">
                                     <p className='text-gray mb-1'>Last name</p>
-                                    <p className='m-0 fs-5 fw-bold text-black'>{auth.userData!==null && auth.userData.fullName.split(' ').filter((item,index)=>index>0).join(' ')}</p>
+                                    <p className='m-0 fs-5 fw-bold text-black'>{auth?.userData!==null && auth?.userData.fullName.split(' ').filter((item,index)=>index>0).join(' ')}</p>
                                 </Card>
                                 <Card className="info-item rounded shadow p-3 mb-3">
                                     <p className='text-gray mb-1'>Verified email</p>
-                                    <p className='m-0 fs-5 fw-bold text-gray'>{auth.userData!==null && auth.userData.email}</p>
+                                    <p className='m-0 fs-5 fw-bold text-gray'>{auth?.userData!==null && auth?.userData.email}</p>
                                 </Card>
                                 <Card className="info-item rounded shadow p-3  d-flex align-items-md-center justify-content-between">
                                     <div className="wrapper-phone-number">
                                         <p className='text-gray mb-1'>Phone number</p>
-                                        <p className='m-0 fs-5 fw-bold text-black'>{auth.phone!==null ? auth.phone : '-'}</p>
+                                        <p className='m-0 fs-5 fw-bold text-black'>{auth?.phone!==null ? auth?.phone : '-'}</p>
                                     </div>                            
                                     <div>
                                         <Link href='/profile/add-phone-number'>

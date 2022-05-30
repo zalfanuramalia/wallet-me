@@ -61,8 +61,8 @@ const Confirmation= () =>{
                                     </Col>
                                     <Col xl={10} xs={6}>
                                         <div className="d-flex flex-column justify-content-center mt-2">
-                                            <div className="fw-bold">{transfer.dataReceiver.user.fullName}</div>
-                                            <div>{transfer.dataReceiver.phone}</div>
+                                            <div className="fw-bold">{transfer?.dataReceiver.user.fullName}</div>
+                                            <div>{transfer?.dataReceiver.phone}</div>
                                         </div>
                                     </Col>
                                 </Row>

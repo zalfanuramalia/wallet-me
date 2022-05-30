@@ -1,6 +1,6 @@
 import { Container, Row, Col, Card, Button} from "react-bootstrap"
 import NavbarComponent from "../../components/NavbarHome"
-import ProfileBar from "../../components/ProfileBar"
+import ProfileBar from "../../components/AddPhone"
 import Footer from "../../components/Footer"
 import Head from 'next/head'
 import { FaPencilAlt } from "react-icons/fa"
