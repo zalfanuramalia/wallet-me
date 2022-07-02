@@ -66,7 +66,7 @@ const Status = () => {
                     </Row>
                     <div className="text-end ">
                         <Button className="btn-primary me-3 mb-4">Download PDF</Button>
-                        <Button className="btn-primary mb-4">Back to Home</Button>
+                        <Button className="btn-primary mb-4" onClick={()=>router.push('/home')}>Back to Home</Button>
                     </div>
                 </Container>
             </div>
