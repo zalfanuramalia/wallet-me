@@ -1,12 +1,25 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import Head from 'next/head'
 import { Container, Form, Row, Col, Card, Button } from 'react-bootstrap'
 import NavbarComponent from '../../components/NavbarHome'
 import Footer from '../../components/Footer'
 import confirmation from '../../styles/confirmation.module.scss'
 import Image from 'next/image'
+import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux'
+import moment from 'moment'
 
-const status = () => {
+const Status = () => {
+    const {transfer, auth} = useSelector(state => state)
+    const router = useRouter()
+
+    useEffect(()=>{
+        if(auth.token!==null){
+           router.replace('/transfer/status');
+        }else{
+           router.replace('/');
+        }
+     },[auth.token, router]);
     return (
         <>
         <Head>
@@ -20,35 +33,35 @@ const status = () => {
                     <Row className={`${confirmation.list} mb-3 ms-3`}>
                         <div>
                             <div className="fs-5 fw-bold">Amount</div>
-                            <div className="fs-4">Rp100.000</div>
+                            <div className="fs-4">Rp{transfer.dataTransfer!==null && Number(transfer.dataTransfer.amount).toLocaleString('id-ID')}</div>
                         </div>
                     </Row>
                     <Row className={`${confirmation.list} mb-3 ms-3`}>
                         <div>
                             <div className="fs-5 fw-bold">Balance Left</div>
-                            <div className="fs-4">Rp20.000</div>
+                            <div className="fs-4">Rp {auth.balance!==null && Number(auth.balance).toLocaleString('id-ID')}</div>
                         </div>
                     </Row>
                     <Row className={`${confirmation.list} mb-3 ms-3`}>
                         <div>
                             <div className="fs-5 fw-bold">Date&Time</div>
-                            <div className="fs-4">May 11, 2020 - 12.20</div>
+                            <div className="fs-4">{moment(new Date().toString()).format('MMM DD YYYY - HH:MM')}</div>
                         </div>
                     </Row>
                     <Row className={`${confirmation.list} mb-3 ms-3`}>
                         <div>
                             <div className="fs-5 fw-bold">Notes</div>
-                            <div className="fs-4">For buying some socks</div>
+                            <div className="fs-4">{transfer.dataTransfer!==null && transfer.dataTransfer.notes}</div>
                         </div>
                     </Row>
                     <div className="fs-5 ms-3 fw-bold">Transfer</div>
                     <Row className={`${confirmation.list} mb-5 ms-3`}>
                         <Col xs={2}>
-                            <Image src="/images/prof-6.png" width={50} height={50} alt='profil'/>
+                            <Image src={transfer.dataReceiver===null || transfer.dataReceiver.user==null || transfer.dataReceiver.user.picture===null || transfer.dataReceiver.user.picture==='undefiend' ? '/images/prof-6.png' : transfer.dataReceiver.user.picture} width={50} height={50} alt='profil'/>
                         </Col>
                         <Col xs={5}>
-                            <div className="fs-4">Samuel Suhi</div>
-                            <div className="fs-6">+62 813-8492-9994</div>
+                            <div className="fs-4">{transfer.dataReceiver!==null && transfer.dataReceiver.user!==null && transfer.dataReceiver.user.fullName}</div>
+                            <div className="fs-6">{transfer.dataReceiver!==null && transfer.dataReceiver.user!==null && transfer.dataReceiver.phone}</div>
                         </Col>
                     </Row>
                     <div className="text-end ">
@@ -62,4 +75,4 @@ const status = () => {
     )
 }
 
-export default status
+export default Status
