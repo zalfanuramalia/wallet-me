@@ -19,7 +19,7 @@ const Status = () => {
         }else{
            router.replace('/');
         }
-     },[auth.token, router]);
+     },[]);
     return (
         <>
         <Head>
@@ -39,7 +39,7 @@ const Status = () => {
                     <Row className={`${confirmation.list} mb-3 ms-3`}>
                         <div>
                             <div className="fs-5 fw-bold">Balance Left</div>
-                            <div className="fs-4">Rp {auth.balance!==null && Number(auth.balance).toLocaleString('id-ID')}</div>
+                            <div className="fs-4">Rp {auth?.balance!==null && transfer?.dataTransfer!==null && transfer.dataTransfer?.amount!==null && (auth?.balance - parseFloat(transfer?.dataTransfer?.amount)).toLocaleString('id-ID')}</div>
                         </div>
                     </Row>
                     <Row className={`${confirmation.list} mb-3 ms-3`}>
@@ -66,7 +66,7 @@ const Status = () => {
                     </Row>
                     <div className="text-end ">
                         <Button className="btn-primary me-3 mb-4">Download PDF</Button>
-                        <Button className="btn-primary mb-4" onClick={()=>router.push('/home')}>Back to Home</Button>
+                        <Button className="btn-primary mb-4" onClick={()=>router.push('/')}>Back to Home</Button>
                     </div>
                 </Container>
             </div>
